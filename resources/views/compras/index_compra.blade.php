@@ -3,6 +3,8 @@
     <div class="container mt-4">
 
         {{-- HEADER --}}
+
+
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
 
             <h2 class="fw-bold text-dark m-0 text-center text-md-start">
@@ -10,12 +12,12 @@
             </h2>
 
             <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
-                <a href="{{ route('compras.create') }}" class="btn btn-dark ">
-                    + Nova Compra
+                <a href="{{ route('index') }}" class="btn btn-outline-dark">
+                    <i class="bi bi-arrow-left"></i> Menu
                 </a>
 
-                <a href="" class="btn btn-dark">
-                    <i class="bi bi-star-fill me-1"></i> Avaliações
+                <a href="{{ route('compras.create') }}" class="btn btn-dark">
+                    + Nova Compra
                 </a>
 
                 <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark ">
@@ -157,8 +159,7 @@
                                             </a>
 
                                             {{-- Excluir --}}
-                                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST"
-                                               >
+                                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -208,7 +209,7 @@
                         </h3>
                     </div>
                 </div>
-{{--
+                {{--
                 <a href="" class="btn btn-dark mt-2 w-100">
                     <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
                 </a> --}}

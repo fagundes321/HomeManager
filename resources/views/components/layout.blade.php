@@ -27,6 +27,15 @@
             </div>
 
         @endif
+        <div class="text-center mb-4">
+            <a href="{{ route('index') }}" class="text-decoration-none">
+                <h1 class="fw-bold text-dark mb-1">HomeManager</h1>
+                <p class="text-muted mb-0">
+                    Gerencie sua casa de forma simples e organizada
+                </p>
+            </a>
+        </div>
+        
         {{ $slot }}
     </div>
 </body>
