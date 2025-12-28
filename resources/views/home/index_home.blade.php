@@ -9,9 +9,6 @@
                 {{ $agora->translatedFormat('d/m/Y') }} • {{ $agora->format('H:i') }}
             </span>
         </div>
-
-
-
         <hr>
         {{-- GRID PRINCIPAL --}}
         <div class="row g-4">
