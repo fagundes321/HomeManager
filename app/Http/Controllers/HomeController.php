@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Compras;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -12,8 +13,11 @@ class HomeController extends Controller
 
         $totalItens = Compras::count();
 
+         $agora = Carbon::now()->locale('pt_BR');
+
         return view('home.index_home')
-        ->with('totalItens' , $totalItens);
+        ->with('totalItens' , $totalItens)
+        ->with('agora', $agora);
     }
 
 }
