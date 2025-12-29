@@ -13,7 +13,7 @@ class MercadosController extends Controller{
         $mercado = Mercados::all();
         $mensagemSucesso = session('mensagem.sucesso');
 
-        return view('mercado.index')
+        return view('compras.mercado.index')
         ->with('mercados', $mercado)
         ->with('mensagemSucesso', $mensagemSucesso);
 
@@ -22,7 +22,7 @@ class MercadosController extends Controller{
 
      public function create(){
 
-        return view('mercado.create_mercado');
+        return view('compras.mercado.create_mercado');
 
     }
 
@@ -38,7 +38,7 @@ class MercadosController extends Controller{
 
      public function edit(Mercados $mercado, Request $request){
         // dd($mercado);
-        return view('mercado.edit_mercado')->with('mercado', $mercado);
+        return view('compras.mercado.edit_mercado')->with('mercado', $mercado);
 
     }
 

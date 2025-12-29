@@ -15,7 +15,7 @@ class CidadesController extends Controller
         // os dados da Tebela/Model Cidades
         $cidades = Cidades::all();
 
-       return view('cidades.index_cidade')
+       return view('compras.cidades.index_cidade')
        ->with('cidades', $cidades);
 
     }
@@ -23,7 +23,7 @@ class CidadesController extends Controller
     //Esse metodo é responsavel por retornar a view de criar um nova cidade
      public function create(){
 
-        return view('cidades.create_cidade');
+        return view('compras.cidades.create_cidade');
 
     }
 
@@ -39,7 +39,7 @@ class CidadesController extends Controller
     // Metodo responsavel por retornar a view da Editar a Cidade
      public function edit(Cidades $cidade, Request $request){
 
-        return view('cidades.edit_cidade')->with('cidade', $cidade);
+        return view('compras.cidades.edit_cidade')->with('cidade', $cidade);
 
     }
 

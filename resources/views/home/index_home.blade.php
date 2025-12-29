@@ -6,8 +6,10 @@
 
         <div class="text-center mb-4">
             <span class="badge bg-dark fs-6 px-3 py-2">
-                {{ $agora->translatedFormat('d/m/Y') }} • {{ $agora->format('H:i') }}
+                {{ $agora->translatedFormat('d/m/Y') }} •
+                <span id="clock">{{ $agora->format('H:i') }}</span>
             </span>
+
         </div>
         <hr>
         {{-- GRID PRINCIPAL --}}
@@ -125,7 +127,7 @@
 
             {{-- DESPENSA --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="#" class="text-decoration-none">
+                <a href="{{route('despensa.index')}}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -147,7 +149,7 @@
 
                             <p class="fw-bold h1 text-dark text-center ">
 
-                                {{ $totalItens }}
+                                {{ $totalDespensa }}
                             </p>
                             <div class="text-center d-flex justify-content-center align-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
