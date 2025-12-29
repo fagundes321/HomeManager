@@ -12,9 +12,9 @@
 
                     <div class="card-body">
 
-                        <form action="{{ route('despensa.store') }}" method="POST">
+                        <form action="{{ route('despensa.update', $despensa->id) }}" method="POST">
                             @csrf
-
+                            @method('PUT')
                             <div class="row g-3">
 
                                 {{-- Nome --}}
@@ -30,7 +30,7 @@
                                         name="nome"
                                         class="form-control border-dark"
                                         placeholder="Ex.: Arroz, Feijão..."
-                                        value="{{ old('nome') }}"
+                                        value="{{ old('nome', $despensa->nome) }}"
                                     >
                                 </div>
 
@@ -45,7 +45,7 @@
                                         name="marca"
                                         class="form-control border-dark"
                                         placeholder="Ex.: Sadia, Perdigão..."
-                                        value="{{ old('marca') }}"
+                                        value="{{ old('marca', $despensa->marca) }}"
                                     >
                                 </div>
 
@@ -63,7 +63,7 @@
                                         name="quantidade"
                                         class="form-control border-dark"
                                         placeholder="Qtd"
-                                        value="{{ old('quantidade') }}"
+                                        value="{{ old('quantidade', $despensa->quantidade) }}"
                                     >
                                 </div>
 
@@ -77,7 +77,7 @@
                                         id="validade"
                                         name="validade"
                                         class="form-control border-dark"
-                                        value="{{ old('validade') }}"
+                                        value="{{ old('validade', optional($despensa->validade)->format('Y-m-d')) }}"
                                     >
                                 </div>
 
@@ -91,12 +91,34 @@
                                         name="local"
                                         class="form-select border-dark"
                                         required
+
                                     >
-                                        <option value="" disabled selected>Selecione o local</option>
-                                        <option value="Despensa">Despensa</option>
-                                        <option value="Geladeira">Geladeira</option>
-                                        <option value="Área de Serviço">Área de Serviço</option>
-                                        <option value="Banheiro">Banheiro</option>
+                                        <option  value="" disabled selected
+                                        @selected(old('local', $despensa->local) === null)
+                                        >
+                                            Selecione o local
+                                        </option>
+                                        <option value="Despensa"
+                                        @selected(old('local', $despensa->local) === 'Despensa' )
+                                        >
+                                             Despensa
+                                        </option>
+                                        <option value="Geladeira"
+                                        @selected(old('local', $despensa->local) == 'Geladeira')
+                                        >
+                                            Geladeira
+                                        </option>
+                                        <option value="Área de Serviço"
+                                        @selected(old('local', $despensa->local) === 'Área de Serviço')
+                                        >
+                                            Área de Serviço
+                                        </option>
+                                        <option value="Banheiro"
+
+                                        @selected(old('local', $despensa->local) === 'Banheiro')
+                                        >
+                                            Banheiro
+                                        </option>
                                     </select>
                                 </div>
 

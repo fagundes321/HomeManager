@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 128);
             $table->string('marca', 128);
-            $table->decimal('quantidade');
+            $table->integer('quantidade');
             $table->string("local");
             $table->date('validade')->nullable();
         });

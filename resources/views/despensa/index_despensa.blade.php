@@ -1,47 +1,31 @@
 <x-layout title="">
 
-    <div class="container mt-4">
+<div class="container mt-4">
 
-        {{-- HEADER --}}
+    {{-- BOTÕES --}}
+    <div class="d-flex justify-content-between mb-4">
+        <a href="{{ route('index') }}" class="btn btn-outline-dark">
+            <i class="bi bi-arrow-left"></i> Menu
+        </a>
 
+        <a href="{{ route('despensa.create') }}" class="btn btn-dark">
+            + Novo Item
+        </a>
+    </div>
 
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
+    @forelse ($despensa as $local => $itens)
 
-            <h2 class="fw-bold text-dark m-0 text-center text-md-start">
-                @forelse ($despensa as $item)
-
-
-                {{$item->local}}
-
-            </h2>
-
-            <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
-                <a href="{{ route('index') }}" class="btn btn-outline-dark">
-                    <i class="bi bi-arrow-left"></i> Menu
-                </a>
-
-                <a href="{{ route('despensa.create') }}" class="btn btn-dark">
-                    + Novo Item
-                </a>
-
-
-            </div>
-        </div>
-
-        {{-- MENSAGEM --}}
-        @isset($mensagemSucesso)
-            <div class="alert alert-success border border-dark shadow-sm">
-                {{ $mensagemSucesso }}
-            </div>
-        @endisset
+        {{-- TÍTULO DO LOCAL --}}
+        <h2 class="fw-bold text-dark mt-4 mb-3">
+            {{ $local }}
+        </h2>
 
         {{-- TABELA --}}
-        <div class="card shadow-sm border border-dark">
+        <div class="card shadow-sm border border-dark mb-4">
             <div class="card-body p-0">
-
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0 text-center">
 
+                    <table class="table table-hover align-middle mb-0 text-center">
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
@@ -49,62 +33,40 @@
                                 <th class="d-none d-md-table-cell">Marca</th>
                                 <th class="d-none d-md-table-cell">Quantidade</th>
                                 <th class="d-none d-md-table-cell">Validade</th>
-                                <th class="">Local</th>
-                                {{-- <th class="d-none d-md-table-cell">Cidade</th> --}}
-                                {{-- <th>Total</th> --}}
                                 <th>Ações</th>
                             </tr>
                         </thead>
 
-                        <tbody class="table-group-divider ">
+                        <tbody>
+                        @foreach ($itens as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
 
+                                <td class="fw-semibold">
+                                    {{ $item->nome }}
 
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <div class="d-md-none small text-muted">
+                                        {{ $item->marca }}
+                                    </div>
+                                </td>
 
-                                    <td class="fw-semibold ">
-                                        {{ $item->nome }}
-                                    <td class="fw-semivold">
-                                        {{$item->marca}}
-                                    </td>
-                                        {{-- MOBILE INFO --}}
-                                        <div class="d-md-none small text-muted mt-1 lh-sm">
+                                <td class="d-none d-md-table-cell">
+                                    {{ $item->marca }}
+                                </td>
 
+                                <td class="d-none d-md-table-cell">
+                                    {{ $item->quantidade }}
+                                </td>
 
-                                            {{-- Marca --}}
-                                            @if ($item->marca)
-                                                <div>
-                                                    <i class="bi bi-tag"></i>
-                                                    {{ $item->marca }}
-                                                </div>
-                                            @endif
+                                <td class="d-none d-md-table-cell">
+                                    {{ $item->validade?->format('d/m/Y') }}
+                                </td>
 
-
-
-                                        </div>
-                                    </td>
-
-
-
-                                    <td class="">
-                                        {{ $item->quantidade }}
-
-
-                                    </td>
-
-                                    <td>
-                                        {{$item->validade?->format('d/m/Y')}}
-                                    </td>
-
-                                    <td>
-                                        {{ $item->local }}
-                                    </td>
-                                    {{-- AÇÕES --}}
-                                    <td>
+                                   <td>
                                         <div class="d-flex justify-content-center gap-2">
 
                                             {{-- Editar --}}
-                                            <a href=""
+                                            <a href="{{ route('despensa.edit', $item->id) }}"
                                                 class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
                                                 title="Editar" style="width: 36px; height: 36px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -117,7 +79,7 @@
                                             </a>
 
                                             {{-- Excluir --}}
-                                            <form action="" method="POST">
+                                            <form action="{{ route('despensa.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -136,75 +98,28 @@
 
                                         </div>
                                     </td>
-                                </tr>
-                            @empty
-                                <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
-                <a href="{{ route('index') }}" class="btn btn-outline-dark">
-                    <i class="bi bi-arrow-left"></i> Menu
-                </a>
-
-                <a href="{{ route('despensa.create') }}" class="btn btn-dark">
-                    + Novo Item
-                </a>
-
-
-            </div>
-                                <tr>
-                                    <td colspan="8" class="text-center text-muted py-4">
-                                        Nenhum item cadastrado.
-                                    </td>
-                                </tr>
-                            @endforelse
-
+                            </tr>
+                        @endforeach
                         </tbody>
+
                     </table>
-                </div>
 
+                </div>
             </div>
         </div>
 
-        {{-- RESUMO --}}
-        <div class="row mt-4 mb-4">
-
-            {{-- TOTAL ITENS --}}
-            <div class="col-12 col-md-3 mb-3">
-                <div class="card border border-dark shadow-sm h-100">
-                    <div class="card-body text-center">
-                        <span class="text-muted text-uppercase small">
-                            Total de Itens
-                        </span>
-                        <h3 class="fw-bold mt-2">
-                            {{ $despensa->count() }}
-                        </h3>
-                    </div>
-                </div>
-                {{--
-                <a href="" class="btn btn-dark mt-2 w-100">
-                    <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
-                </a> --}}
-            </div>
-
-            {{-- TOTAL GERAL --}}
-            <div class="col-12 col-md-9 mb-3">
-                <div class="card border border-dark shadow-sm h-100 bg-dark text-white">
-                    <div class="card-body text-center d-flex flex-column justify-content-center">
-                        <span class="text-uppercase small">
-                            Valor Total das Compras
-                        </span>
-
-                        <h2 class="fw-bold mt-2">
-                            {{-- R$ {{ number_format($totalCompras, 2, ',', '.') }} --}}
-                        </h2>
-
-                        <small class="opacity-75">
-                            Soma de todos os itens cadastrados
-                        </small>
-                    </div>
-                </div>
-            </div>
-
+        {{-- RESUMO DO LOCAL --}}
+        <div class="mb-4 text-end text-muted">
+            Total de itens em {{ $local }}:
+            <strong>{{ $itens->count() }}</strong>
         </div>
 
-    </div>
+    @empty
+        <div class="text-center text-muted py-5">
+            Nenhum item cadastrado.
+        </div>
+    @endforelse
+
+</div>
 
 </x-layout>

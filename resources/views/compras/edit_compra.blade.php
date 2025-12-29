@@ -35,15 +35,9 @@
                                     <label for="marca" class="form-label fw-semibold text-dark">
                                         Marca
                                     </label>
-                                    <input
-                                        class="form-control border-dark"
-                                        type="text"
-                                        id="marca"
-                                        name="marca"
-                                        placeholder="Ex.: Sadia, Perdigão..."
-                                        value="{{ old('marca', $compra->marca) }}"
-                                        autofocus
-                                    >
+                                    <input class="form-control border-dark" type="text" id="marca" name="marca"
+                                        placeholder="Ex.: Sadia, Perdigão..." value="{{ old('marca', $compra->marca) }}"
+                                        autofocus>
                                 </div>
 
 
@@ -57,53 +51,41 @@
                                         <span class="input-group-text bg-white border-dark text-dark">
                                             R$
                                         </span>
-                                        <input
-                                        class="form-control border-dark"
-                                        type="text"
-                                        id="preco"
-
-                                        name="preco"
-                                        placeholder="0,00"
-                                        value="{{ old('preco', $compra->preco) }}"
+                                        <input class="form-control border-dark" type="text" id="preco"
+                                            name="preco" placeholder="0,00" value="{{ old('preco', $compra->preco) }}"
                                             oninput="formatarMoeda(this)">
                                     </div>
                                 </div>
 
-                                  {{-- Quantidade + Unidade --}}
+                                {{-- Quantidade + Unidade --}}
                                 <div class="col-md-4">
                                     <label class="form-label fw-semibold text-dark">
                                         Quantidade
                                     </label>
 
                                     <div class="input-group">
-                                        <input
+                                        <input type="number" step="0.01" min="1"
+                                            class="form-control border-dark" name="quantidade" placeholder="1"
+                                            value="{{ old('quantidade', $compra->quantidade) }}">
 
-                                            type="number"
-                                            step="0.01"
-                                            min="1"
-                                            class="form-control border-dark"
-                                            name="quantidade"
-                                            placeholder="1"
-                                            value="{{ old('quantidade', $compra->quantidade) }}"
-                                        >
-                                        
-                                 <select class="form-select border-dark" name="unidade"  style="max-width: 160px;">
-                                         <option value="" disabled selected>
-                                            Selecione
-                                        </option>
-                                    <option value="un">unidade</option>
-                                    <option value="kg">Quilo</option>
-                                    <option value="g">Grama</option>
-                                    <option value="L">Litro</option>
-                                    <option value="ml">Mililitro</option>
-                                    <option value="pct">Pacote</option>
-                                    <option value="cx">Caixa</option>
-                                </select>
+                                        <select class="form-select border-dark" name="unidade"
+                                            style="max-width: 160px;">
+                                            <option value="" disabled selected>
+                                                Selecione
+                                            </option>
+                                            <option value="un">unidade</option>
+                                            <option value="kg">Quilo</option>
+                                            <option value="g">Grama</option>
+                                            <option value="L">Litro</option>
+                                            <option value="ml">Mililitro</option>
+                                            <option value="pct">Pacote</option>
+                                            <option value="cx">Caixa</option>
+                                        </select>
 
                                     </div>
                                 </div>
 
-                                  {{-- Mercado --}}
+                                {{-- Mercado --}}
                                 <div class="col-md-3">
                                     <label class="form-label fw-semibold text-dark">
                                         Mercado
@@ -125,7 +107,7 @@
                                     <label class="form-label fw-semibold text-dark">
                                         Cidade
                                     </label>
-                                    <select class="form-select border-dark" name="cidade_id" >
+                                    <select class="form-select border-dark" name="cidade_id">
                                         <option value="" disabled selected>
                                             Selecione
                                         </option>
@@ -160,14 +142,14 @@
         </div>
     </div>
 
-<script>
-    function formatarMoeda(input) {
-        let value = input.value.replace(/\D/g, '');
-        if (value === '') return;
-        value = (parseInt(value) / 100).toFixed(2);
-        input.value = value.replace('.', ',');
-    }
-</script>
+    <script>
+        function formatarMoeda(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value === '') return;
+            value = (parseInt(value) / 100).toFixed(2);
+            input.value = value.replace('.', ',');
+        }
+    </script>
 
 
 </x-layout>
