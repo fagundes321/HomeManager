@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Despensa extends Model
 {
-    protected $fillable = ['nome', 'marca', 'local', 'validade'];
+        public $timestamps = false;
+
+    protected $fillable = ['nome', 'marca', 'quantidade','local', 'validade'];
+
+
+    protected $casts = [
+    'validade' => 'date',
+];
+
 }

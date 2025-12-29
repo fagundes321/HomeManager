@@ -8,7 +8,11 @@
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
 
             <h2 class="fw-bold text-dark m-0 text-center text-md-start">
-                Depensa
+                @forelse ($despensa as $item)
+
+
+                {{$item->local}}
+
             </h2>
 
             <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
@@ -16,7 +20,7 @@
                     <i class="bi bi-arrow-left"></i> Menu
                 </a>
 
-                <a href="{{ route('compras.create') }}" class="btn btn-dark">
+                <a href="{{ route('despensa.create') }}" class="btn btn-dark">
                     + Novo Item
                 </a>
 
@@ -43,9 +47,10 @@
                                 <th>#</th>
                                 <th>Nome</th>
                                 <th class="d-none d-md-table-cell">Marca</th>
-                                <th class="d-none d-md-table-cell">Local</th>
+                                <th class="d-none d-md-table-cell">Quantidade</th>
+                                <th class="d-none d-md-table-cell">Validade</th>
+                                <th class="">Local</th>
                                 {{-- <th class="d-none d-md-table-cell">Cidade</th> --}}
-                                <th>Validade</th>
                                 {{-- <th>Total</th> --}}
                                 <th>Ações</th>
                             </tr>
@@ -53,13 +58,15 @@
 
                         <tbody class="table-group-divider ">
 
-                            @forelse ($despensa as $item)
+
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
 
-                                    <td class="fw-semibold text-start">
+                                    <td class="fw-semibold ">
                                         {{ $item->nome }}
-
+                                    <td class="fw-semivold">
+                                        {{$item->marca}}
+                                    </td>
                                         {{-- MOBILE INFO --}}
                                         <div class="d-md-none small text-muted mt-1 lh-sm">
 
@@ -79,41 +86,25 @@
 
 
 
-                                    <td class="text-start">
-
-                                        {{-- DESKTOP (inalterado) --}}
-                                        <div class="d-none d-md-block fw-bold text-success text-center">
-                                            R$ {{ number_format($compra->total, 2, ',', '.') }}
-
-                                            <div class="small text-muted">
-                                                {{ $compra->quantidade }} {{ $compra->unidade }}
-                                                × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
-                                            </div>
-                                        </div>
-                                        {{-- MOBILE --}}
-                                        <div class="d-md-none small">
-
-                                            <div class="fw-semibold text-success">
-                                                R$ {{ number_format($compra->total, 2, ',', '.') }}
-                                            </div>
-
-                                            <div class="text-muted">
-                                                {{ $compra->quantidade }} {{ $compra->unidade }}
-                                                × {{ number_format((float) $compra->preco, 2, ',', '.') }}
-                                            </div>
-
-                                        </div>
+                                    <td class="">
+                                        {{ $item->quantidade }}
 
 
                                     </td>
 
+                                    <td>
+                                        {{$item->validade?->format('d/m/Y')}}
+                                    </td>
 
+                                    <td>
+                                        {{ $item->local }}
+                                    </td>
                                     {{-- AÇÕES --}}
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
 
                                             {{-- Editar --}}
-                                            <a href="{{ route('compras.edit', $compra->id) }}"
+                                            <a href=""
                                                 class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
                                                 title="Editar" style="width: 36px; height: 36px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -126,7 +117,7 @@
                                             </a>
 
                                             {{-- Excluir --}}
-                                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST">
+                                            <form action="" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -147,6 +138,17 @@
                                     </td>
                                 </tr>
                             @empty
+                                <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
+                <a href="{{ route('index') }}" class="btn btn-outline-dark">
+                    <i class="bi bi-arrow-left"></i> Menu
+                </a>
+
+                <a href="{{ route('despensa.create') }}" class="btn btn-dark">
+                    + Novo Item
+                </a>
+
+
+            </div>
                                 <tr>
                                     <td colspan="8" class="text-center text-muted py-4">
                                         Nenhum item cadastrado.

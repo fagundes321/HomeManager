@@ -17,4 +17,21 @@ class DespensaController extends Controller
 
     }
 
+
+     public function create(){
+
+        return view('despensa.create_despensa');
+
+    }
+
+
+     public function store(Request $request){
+
+        $salvarCasa = Despensa::create($request->all());
+        return to_route('despensa.index');
+
+
+    }
+
+
 }
