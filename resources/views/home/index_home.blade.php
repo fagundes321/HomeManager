@@ -74,7 +74,7 @@
 
             {{-- FINANCEIRO --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="#" class="text-decoration-none">
+                <a target="__blank" href="https://docs.google.com/spreadsheets/d/10vU2tjXz1vMTUuc5hYZxvgB8S9BGtawPrsLBLoXvaXg/edit?gid=1169939068#gid=1169939068" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -127,7 +127,7 @@
 
             {{-- DESPENSA --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="{{route('despensa.index')}}" class="text-decoration-none">
+                <a href="{{ route('despensa.index') }}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -163,7 +163,9 @@
                                 </svg>
 
                                 <p class="mb-0">
-                                    Próximo vencimento: 15/04/2026
+                                  Próximo vencimento:
+{{ $validadeDespensa?->validade?->format('d/m/Y') ?? 'Sem validade' }}
+
                                 </p>
                             </div>
 

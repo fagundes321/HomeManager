@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Despensa;
 
+use Illuminate\Support\Facades\DB;
+
+
 class DespensaController extends Controller
 {
 
@@ -69,13 +72,15 @@ class DespensaController extends Controller
     }
 
 
-     public function destroy(Despensa $despensa){
+public function destroy(Despensa $despensa)
+{
 
-        $despensa->delete();
+    $despensa->delete();
 
-        return to_route('despensa.index');
 
-    }
+    return to_route('despensa.index');
+}
+
 
 
 }

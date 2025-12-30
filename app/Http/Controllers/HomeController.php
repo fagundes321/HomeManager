@@ -17,9 +17,16 @@ class HomeController extends Controller
 
         $agora = Carbon::now()->locale('pt_BR');
 
+     $validadeDespensa = Despensa::whereNotNull('validade')
+    ->orderBy('validade', 'asc')
+    ->first();
+
+
+
         return view('home.index_home')
         ->with('totalItens' , $totalItens)
         ->with('totalDespensa', $totalDepensa)
+        ->with('validadeDespensa', $validadeDespensa)
         ->with('agora', $agora);
     }
 

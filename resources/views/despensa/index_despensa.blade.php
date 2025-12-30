@@ -85,7 +85,8 @@
 
                                                 <button type="submit"
                                                     class="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center"
-                                                    title="Excluir" style="width: 36px; height: 36px;">
+                                                    title="Excluir" style="width: 36px; height: 36px;"
+                                                    onclick="excluirItem({{ $item->id }})">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-trash">
                                                         <path
