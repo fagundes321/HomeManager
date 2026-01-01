@@ -90,6 +90,7 @@ class ComprasController extends Controller
         $compra->fill($request->all());
         $compra->save();
 
+    
         return to_route('compras.index')->with('mensagem.sucesso', "Item {$compra->nome} Atualizado");
     }
 
