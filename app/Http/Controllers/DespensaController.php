@@ -75,6 +75,7 @@ class DespensaController extends Controller
 public function destroy(Despensa $despensa)
 {
 
+
     $despensa->delete();
 
 

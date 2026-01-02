@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('avaliacoes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('produto');
+            $table->string('marca');
+            $table->tinyInteger('avaliacao');
+            $table->string('comentario')->nullable();
+            $table->string('categoria');
+            $table->decimal('menor_preco', 10, 2)->nullable();
+            $table->decimal('maior_preco', 10, 2)->nullable();
+            $table->date('data_avaliacao');
         });
     }
 

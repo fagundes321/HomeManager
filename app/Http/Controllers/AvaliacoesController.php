@@ -3,16 +3,73 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Avaliacoes;
+use Carbon\Carbon;
 
 class AvaliacoesController extends Controller
 {
 
 
-     public function index(){
+    public function index()
+    {
 
-        return view('avaliacoes.index_avaliacoes');
+        $avaliacoes = Avaliacoes::All();
 
+        $avaliacoes = Avaliacoes::orderByRaw("
+            CASE
+                WHEN categoria = 'Alimentos' THEN 1
+                WHEN categoria = 'Bebidas' THEN 2
+                WHEN categoria = 'Higiene' THEN 3
+                WHEN categoria = 'Limpeza' THEN 4
+                ELSE 5
+            END
+        ")
+            ->get()
+            ->groupBy('categoria');
+
+        return view('avaliacoes.index_avaliacoes')
+            ->with('avaliacoes', $avaliacoes);
     }
 
 
+    public function create()
+    {
+
+        return view('avaliacoes.create_avaliacoes');
+    }
+
+
+    public function store(Request $request)
+    {
+
+        $dados = [
+            'produto' => $request->produto,
+            'marca' => $request->marca,
+            'categoria' => $request->categoria,
+            'avaliacao' => $request->avaliacao,
+            'comentario' => $request->comentario,
+
+            'menor_preco' => $request->filled('menor_preco')
+                ? str_replace(',', '.', $request->menor_preco)
+                : null,
+
+            'maior_preco' => $request->filled('maior_preco')
+                ? str_replace(',', '.', $request->maior_preco)
+                : null,
+
+            'data_avaliacao' => now(),
+        ];
+
+        Avaliacoes::create($dados);
+        return to_route('avaliacoes.index');
+    }
+
+
+    public function destroy(Avaliacoes $avaliacoes)
+    {
+
+        $avaliacoes->delete();
+
+        return to_route('avaliacoes.index');
+    }
 }
