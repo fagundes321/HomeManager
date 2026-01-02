@@ -214,6 +214,7 @@
 
                             <p class="fw-bold h1 text-dark text-center ">
 
+                                
                                 {{ $totalItens }}
                             </p>
                             {{-- <div class="text-center d-flex justify-content-center align-items-center">
