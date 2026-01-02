@@ -11,8 +11,7 @@
                     </div>
 
                     <div class="card-body">
-
-                        <form action="{{ route('avaliacao.store') }}" method="POST">
+                        <form action="{{ route('avaliacao.store', $avaliacao->id) }}" method="POST">
                             @csrf
 
                             <div class="row g-3">
@@ -24,7 +23,7 @@
                                     </label>
                                     <input required autofocus class="form-control border-dark" type="text"
                                         id="produto" name="produto" placeholder="Ex.: Arroz, Feijão..."
-                                        value="{{ old('produto')}}">
+                                        value="{{ old('produto', $avaliacao->produto) }}">
                                 </div>
 
                                 {{-- Marca --}}
@@ -33,7 +32,8 @@
                                         Marca
                                     </label>
                                     <input class="form-control border-dark" type="text" id="marca" name="marca"
-                                        placeholder="Ex.: Sadia, Perdigão..." value="{{ old('marca') }}">
+                                        placeholder="Ex.: Sadia, Perdigão..."
+                                        value="{{ old('marca', $avaliacao->marca) }}">
                                 </div>
 
 
@@ -48,10 +48,22 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="categoria" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="Alimentos">Alimentos</option>
-                                                <option value="Bebidas">Bebidas</option>
-                                                <option value="Limpeza">Limpeza</option>
-                                                <option value="Higiene">Higiene</option>
+                                                <option value="Alimentos"
+                                                @selected(old('categoria', $avaliacao->categoria) === 'Alimentos')>
+                                                    Alimentos
+                                                </option>
+                                                <option value="Bebidas"
+                                                @selected(old('categoria', $avaliacao->categoria) === 'Bebidas')>
+                                                    Bebidas
+                                                </option>
+                                                <option value="Limpeza"
+                                                @selected(old('categoria', $avaliacao->categoria) === 'Limpeza')>
+                                                    Limpeza
+                                                </option>
+                                                <option value="Higiene"
+                                                @selected(old('categoria', $avaliacao->categoria) === 'Higiene')>
+                                                    Higiene
+                                                </option>
                                             </select>
 
 
@@ -70,9 +82,18 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="avaliacao" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="3">Excelente</option>
-                                                <option value="2">Bom</option>
-                                                <option value="1">Ruim</option>
+                                                <option value="3"
+                                                @selected(old('avaliacao', $avaliacao->avaliacao) === 3)>
+                                                    Excelente
+                                                </option>
+                                                <option value="2"
+                                                @selected(old('avaliacao', $avaliacao->avaliacao) === 2)>
+                                                    Bom
+                                                </option>
+                                                <option value="1"
+                                                @selected(old('avaliacao', $avaliacao->avaliacao) === 1)>
+                                                    Ruim
+                                                </option>
                                             </select>
 
 
@@ -88,7 +109,7 @@
                                     </label>
 
                                     <textarea class="form-control border-dark" id="comentario" name="comentario" rows="4"
-                                        placeholder="Escreva sua opinião sobre o produto...">{{ old('comentario') }}</textarea>
+                                        placeholder="Escreva sua opinião sobre o produto...">{{ old('comentario',$avaliacao->comentario) }}</textarea>
                                 </div>
 
 
@@ -102,8 +123,8 @@
                                             R$
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
-                                            id="menor_preco" name="menor_preco" placeholder="0,00" value="{{ old('menor_preco') }}"
-                                            oninput="formatarMoeda(this)">
+                                            id="menor_preco" name="menor_preco" placeholder="0,00"
+                                            value="{{ old('menor_preco', $avaliacao->menor_preco) }}" oninput="formatarMoeda(this)">
                                     </div>
 
 
@@ -119,8 +140,8 @@
                                             R$
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
-                                            id="maior_preco" name="maior_preco" placeholder="0,00" value="{{ old('maior_preco') }}"
-                                            oninput="formatarMoeda(this)">
+                                            id="maior_preco" name="maior_preco" placeholder="0,00"
+                                            value="{{ old('maior_preco', $avaliacao->maior_preco) }}" oninput="formatarMoeda(this)">
                                     </div>
 
 

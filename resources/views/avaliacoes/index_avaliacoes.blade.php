@@ -8,7 +8,7 @@
                 <i class="bi bi-arrow-left"></i> Menu
             </a>
 
-            <a href="{{ route('avaliacoes.create') }}" class="btn btn-dark">
+            <a href="{{ route('avaliacao.create') }}" class="btn btn-dark">
                 + Novo Produto
             </a>
         </div>
@@ -25,7 +25,7 @@
                 <div class="card-body p-0">
                     <div class="table-responsive">
 
-                        <table class="table table-hover align-middle mb-0 text-center ">
+                        <table class="table table-hover align-middle mb-0 text-center table-fixed">
                             <thead class="table-dark">
                                 <tr>
                                     <th>#</th>
@@ -76,14 +76,12 @@
                                             @endif
                                         </td>
 
-
-                                        <td class="d-none d-md-table-cell">
-                                            @if (empty($produto->comentario))
-                                                -
-                                            @else
-                                                {{ $produto->comentario }}
-                                            @endif
+                                        <td class="d-none d-md-table-cell"
+                                            style="max-width: 300px; white-space: normal; word-break: break-word;">
+                                            {{ $produto->comentario ?? '-' }}
                                         </td>
+
+
                                         <td>
                                             <span class="text-muted small">
                                                 @if (isset($produto->menor_preco) && $produto->maior_preco && $produto->menor_preco > $produto->maior_preco)
@@ -111,7 +109,7 @@
                                             <div class="d-flex justify-content-center gap-2">
 
                                                 {{-- Editar --}}
-                                                <a href="{{-- route('despensa.edit', $item->id) --}}"
+                                                <a href="{{ route('avaliacao.edit', $produto->id) }}"
                                                     class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
                                                     title="Editar" style="width: 36px; height: 36px;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -124,7 +122,7 @@
                                                 </a>
 
                                                 {{-- Excluir --}}
-                                                <form action="{{ route('avaliacoes.destroy', $produto->id) }}"
+                                                <form action="{{ route('avaliacao.destroy', $produto->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

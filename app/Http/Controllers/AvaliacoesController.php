@@ -61,15 +61,51 @@ class AvaliacoesController extends Controller
         ];
 
         Avaliacoes::create($dados);
-        return to_route('avaliacoes.index');
+        return to_route('avaliacao.index');
     }
 
 
-    public function destroy(Avaliacoes $avaliacoes)
+    public function destroy(Avaliacoes $avaliacao)
+    {
+        $avaliacao->delete();
+        return to_route('avaliacao.index');
+    }
+
+
+
+    public function edit(Avaliacoes  $avaliacao)
     {
 
-        $avaliacoes->delete();
-
-        return to_route('avaliacoes.index');
+        return view('avaliacoes.edit_avaliacoes')
+            ->with('avaliacao', $avaliacao);
     }
+
+
+     public function update(Avaliacoes $avaliacao, Request $request){
+
+        $avaliacao = [
+            'produto' => $request->produto,
+            'marca' => $request->marca,
+            'categoria' => $request->categoria,
+            'avaliacao' => $request->avaliacao,
+            'comentario' => $request->comentario,
+
+            'menor_preco' => $request->filled('menor_preco')
+                ? str_replace(',', '.', $request->menor_preco)
+                : null,
+
+            'maior_preco' => $request->filled('maior_preco')
+                ? str_replace(',', '.', $request->maior_preco)
+                : null,
+
+            'data_avaliacao' => now(),
+        ];
+
+        Avaliacoes::save($avaliacao);
+
+        return to_route('avaliacao.index');
+
+    }
+
 }
+

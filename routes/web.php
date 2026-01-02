@@ -17,6 +17,6 @@ Route::resource('/compras', ComprasController::class)->except(['show']);
 Route::resource('/mercado', MercadosController::class)->except(['show']);
 Route::resource('/cidades', CidadesController::class)->except(['show']);
 Route::resource('/despensa', DespensaController::class)->except(['show']);
-Route::resource('/avaliacoes', AvaliacoesController::class)->except(['show']);
+Route::resource('/avaliacao', AvaliacoesController::class)->except(['show']);
 // Route::get('/compras/editar/{compra}', [ComprasController::class, 'edit'])->name('compras.edit');
 // Route::get('/compras/update/{compra}', [ComprasController::class,  'update'])->name('compras.update');
