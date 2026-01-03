@@ -14,97 +14,169 @@
         </div>
 
         @forelse ($avaliacoes as $categoria => $produtos)
-            {{-- TÍTULO DO LOCAL --}}
-            <h2 class="fw-bold text-dark mt-4 mb-3">
-                {{-- {{ $local }} --}}
+
+            <h4 class="fw-bold text-dark mt-4 mb-3">
                 {{ $categoria }}
-            </h2>
+            </h4>
 
-            {{-- TABELA --}}
-            <div class="card shadow-sm border border-dark mb-4">
-                <div class="card-body p-0">
+            {{-- ================= MOBILE (CARDS) ================= --}}
+            <div class="d-md-none">
+                @foreach ($produtos as $produto)
+                    <div class="card shadow-sm border-dark mb-3">
+                        <div class="card-body">
+
+                            {{-- PRODUTO --}}
+                            <h6 class="fw-bold mb-1">
+                                {{ $produto->produto }}
+                            </h6>
+
+                            {{-- MARCA --}}
+                            @if ($produto->marca)
+                                <div class="small text-muted mb-1">
+                                    Marca: {{ $produto->marca }}
+                                </div>
+                            @endif
+
+                            {{-- AVALIAÇÃO --}}
+                            @php
+                                $avaliacoesBadge = [
+                                    1 => ['Ruim', 'danger'],
+                                    2 => ['Bom', 'primary'],
+                                    3 => ['Excelente', 'success'],
+                                ];
+                            @endphp
+
+                            @if (isset($avaliacoesBadge[$produto->avaliacao]))
+                                <span class="badge bg-{{ $avaliacoesBadge[$produto->avaliacao][1] }}">
+                                    {{ $avaliacoesBadge[$produto->avaliacao][0] }}
+                                </span>
+                            @endif
+
+                            {{-- COMENTÁRIO --}}
+                            @if ($produto->comentario)
+                                <p class="small text-secondary mt-2 mb-2">
+                                    {{ $produto->comentario }}
+                                </p>
+                            @endif
+
+                            {{-- PREÇO --}}
+                            <div class="small text-muted">
+                                @if ($produto->menor_preco && $produto->maior_preco)
+                                    R$ {{ number_format($produto->menor_preco, 2, ',', '.') }}
+                                    -
+                                    {{ number_format($produto->maior_preco, 2, ',', '.') }}
+                                @elseif($produto->menor_preco)
+                                    R$ {{ number_format($produto->menor_preco, 2, ',', '.') }}
+                                @elseif($produto->maior_preco)
+                                    R$ {{ number_format($produto->maior_preco, 2, ',', '.') }}
+                                @else
+                                    -
+                                @endif
+                            </div>
+
+                            {{-- DATA --}}
+                            <div class="small text-muted mt-1">
+                                {{ $produto->data_avaliacao?->format('d/m/Y') }}
+                            </div>
+
+                            {{-- AÇÕES --}}
+                            <div class="d-flex gap-2 mt-3">
+                                <a href="{{ route('avaliacao.edit', $produto->id) }}"
+                                    class="btn btn-outline-dark btn-sm w-50">
+                                    Editar
+                                </a>
+
+                                <form action="{{ route('avaliacao.destroy', $produto->id) }}" method="POST"
+                                    class="w-50">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            {{-- ================= DESKTOP (TABELA) ================= --}}
+            <div class="d-none d-md-block">
+                <div class="card shadow-sm border-dark mb-4">
                     <div class="table-responsive">
-
-                        <table class="table table-hover align-middle mb-0 text-center table-fixed">
+                        <table class="table table-hover align-middle mb-0">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Produto</th>
-                                    <th class="d-none d-md-table-cell">Marca</th>
-                                    <th>Avaliação</th>
-                                    <th class="d-none d-md-table-cell">Comentário</th>
-                                    <th>Preço</th>
-                                    <th class="d-none d-md-table-cell">Avaliado em</th>
-                                    <th>Ações</th>
+                                    <th style="width: 50px" class="text-center">#</th>
+                                    <th style="width: 35%">Produto</th>
+                                    <th style="width: 15%" class="text-center">Marca</th>
+                                    <th style="width: 15%" class="text-center">Avaliação</th>
+                                    <th style="width: 15%" class="text-center">Preço</th>
+                                    <th style="width: 10%" class="text-center">Data</th>
+                                    <th style="width: 10%" class="text-center">Ações</th>
                                 </tr>
                             </thead>
 
-                            <tbody class="">
+                            <tbody>
                                 @foreach ($produtos as $produto)
-                                    <tr class="">
-                                        <td>
+                                    <tr>
+
+                                        {{-- # --}}
+                                        <td class="text-center text-muted">
                                             {{ $loop->iteration }}
-
                                         </td>
 
-
-                                        <td class="fw-semibold ">
-                                            {{ $produto->produto }}
-                                            <div class="d-md-none small text-muted">
-                                                {{ $produto->marca }}
-                                            </div>
-                                        </td>
-
-
-                                        <td class="d-none d-md-table-cell">
-                                            {{ $produto->marca }}
-                                        </td>
-
+                                        {{-- PRODUTO + COMENTÁRIO --}}
                                         <td>
-                                            @php
-                                                $avaliacoes = [
-                                                    1 => ['Ruim', 'danger'],
-                                                    2 => ['Bom', 'primary'],
-                                                    3 => ['Excelente', 'success'],
-                                                ];
-                                            @endphp
+                                            <div class="fw-semibold text-dark lh-sm">
 
-                                            @if (isset($avaliacoes[$produto->avaliacao]))
-                                                <span class="badge bg-{{ $avaliacoes[$produto->avaliacao][1] }}">
-                                                    {{ $avaliacoes[$produto->avaliacao][0] }}
+                                                {{ $produto->produto }}
+                                            </div>
+
+                                            @if ($produto->comentario)
+                                                <div class="small text-muted mt-1 lh-sm" style="max-width: 520px;">
+
+                                                    {{ $produto->comentario }}
+                                                </div>
+                                            @endif
+                                        </td>
+
+                                        {{-- MARCA --}}
+                                        <td class="text-center text-secondary">
+                                            {{ $produto->marca ?? '-' }}
+                                        </td>
+
+                                        {{-- AVALIAÇÃO --}}
+                                        <td class="text-center">
+                                            @if (isset($avaliacoesBadge[$produto->avaliacao]))
+                                                <span
+                                                    class="badge bg-{{ $avaliacoesBadge[$produto->avaliacao][1] }} px-3 py-2">
+                                                    {{ $avaliacoesBadge[$produto->avaliacao][0] }}
                                                 </span>
                                             @endif
                                         </td>
 
-                                        <td class="d-none d-md-table-cell"
-                                            style="max-width: 300px; white-space: normal; word-break: break-word;">
-                                            {{ $produto->comentario ?? '-' }}
+                                        {{-- PREÇO --}}
+                                        <td class="text-center text-nowrap">
+                                            @if ($produto->menor_preco && $produto->maior_preco)
+                                                R$ {{ number_format($produto->menor_preco, 2, ',', '.') }}
+                                                <span class="text-muted">–</span>
+                                                {{ number_format($produto->maior_preco, 2, ',', '.') }}
+                                            @elseif($produto->menor_preco)
+                                                R$ {{ number_format($produto->menor_preco, 2, ',', '.') }}
+                                            @elseif($produto->maior_preco)
+                                                R$ {{ number_format($produto->maior_preco, 2, ',', '.') }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
 
-
-                                        <td>
-                                            <span class="text-muted small">
-                                                @if (isset($produto->menor_preco) && $produto->maior_preco && $produto->menor_preco > $produto->maior_preco)
-                                                    R$ {{ number_format($produto->maior_preco, 2, ',', '.') }} -
-                                                    {{ number_format($produto->menor_preco, 2, ',', '.') }}
-                                                @elseif(isset($produto->menor_preco) && $produto->maior_preco && $produto->menor_preco < $produto->maior_preco)
-                                                    R$ {{ number_format($produto->menor_preco, 2, ',', '.') }} -
-                                                    {{ number_format($produto->maior_preco, 2, ',', '.') }}
-                                                @elseif(isset($produto->menor_preco))
-                                                    R$ {{ number_format($produto->menor_preco, 2, ',', '.') }}
-                                                @elseif(isset($produto->maior_preco))
-                                                    R$ {{ number_format($produto->maior_preco, 2, ',', '.') }}
-                                                @elseif (empty($produto->menor_preco) && empty($produto->maior_preco))
-                                                    -
-                                                @endif
-
-                                            </span>
-                                        </td>
-
-                                        <td class="d-none d-md-table-cell">
+                                        {{-- DATA --}}
+                                        <td class="text-center text-nowrap">
                                             {{ $produto->data_avaliacao?->format('d/m/Y') }}
                                         </td>
 
+                                        {{-- AÇÕES --}}
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
 
@@ -142,27 +214,22 @@
 
                                             </div>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
-
                     </div>
                 </div>
             </div>
 
-            {{-- RESUMO DO LOCAL --}}
-            <div class="mb-4 text-end text-muted">
-                {{-- Total de itens em {{ $local }}:
-            <strong>{{ $itens->count() }}</strong> --}}
-            </div>
 
         @empty
             <div class="text-center text-muted py-5">
                 Nenhum item cadastrado.
             </div>
         @endforelse
+
     </div>
 
 </x-layout>

@@ -81,31 +81,26 @@ class AvaliacoesController extends Controller
     }
 
 
-     public function update(Avaliacoes $avaliacao, Request $request){
+  public function update(Request $request, Avaliacoes $avaliacao)
+{
+    $request->merge([
 
-        $avaliacao = [
-            'produto' => $request->produto,
-            'marca' => $request->marca,
-            'categoria' => $request->categoria,
-            'avaliacao' => $request->avaliacao,
-            'comentario' => $request->comentario,
 
-            'menor_preco' => $request->filled('menor_preco')
-                ? str_replace(',', '.', $request->menor_preco)
-                : null,
+        'menor_preco' => $request->filled('menor_preco')
+            ? str_replace(',', '.', $request->menor_preco)
+            : null,
 
-            'maior_preco' => $request->filled('maior_preco')
-                ? str_replace(',', '.', $request->maior_preco)
-                : null,
+        'maior_preco' => $request->filled('maior_preco')
+            ? str_replace(',', '.', $request->maior_preco)
+            : null,
 
-            'data_avaliacao' => now(),
-        ];
+        'data_avaliacao' => now(),
+    ]);
 
-        Avaliacoes::save($avaliacao);
+    $avaliacao->fill($request->all());
+    $avaliacao->save();
 
-        return to_route('avaliacao.index');
-
-    }
-
+    return to_route('avaliacao.index');
 }
 
+}

@@ -11,9 +11,9 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{ route('avaliacao.store', $avaliacao->id) }}" method="POST">
+                        <form action="{{ route('avaliacao.update', $avaliacao->id) }}" method="POST">
                             @csrf
-
+                            @method('PUT')
                             <div class="row g-3">
 
                                 {{-- Nome --}}
