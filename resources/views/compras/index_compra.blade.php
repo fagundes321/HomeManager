@@ -35,77 +35,76 @@
         @endisset
 
         {{-- ================= MOBILE (CARDS + MODAL) ================= --}}
-  <div class="d-md-none">
+        <div class="d-md-none">
 
-    @forelse ($compras as $compra)
-        <div class="card shadow-sm border-dark mb-3">
-            <div class="card-body">
+            @forelse ($compras as $compra)
+                <div class="card shadow-sm border-dark mb-3">
+                    <div class="card-body">
 
-                {{-- PRODUTO --}}
-                <div class="fw-bold fs-6 text-dark">
-                    {{ $compra->nome }}
-                </div>
+                        {{-- PRODUTO --}}
+                        <div class="fw-bold fs-6 text-dark">
+                            {{ $compra->nome }}
+                        </div>
 
-                {{-- MARCA --}}
-                @if($compra->marca)
-                    <div class="small text-muted">
-                        Marca: {{ $compra->marca }}
+                        {{-- MARCA --}}
+                        @if ($compra->marca)
+                            <div class="small text-muted">
+                                Marca: {{ $compra->marca }}
+                            </div>
+                        @endif
+
+                        {{-- QUANTIDADE --}}
+                        <div class="small text-muted">
+                            {{ $compra->quantidade }} {{ $compra->unidade }}
+                        </div>
+
+                        {{-- MERCADO / CIDADE --}}
+                        <div class="small text-muted">
+                            {{ $mercados->firstWhere('id', $compra->mercado_id)->nome_mercado ?? '-' }}
+                            —
+                            {{ $cidades->firstWhere('id', $compra->cidade_id)->nome_cidade ?? '-' }}
+                        </div>
+
+                        {{-- PREÇO --}}
+                        <div class="fw-semibold text-success mt-2">
+                            R$ {{ number_format($compra->total, 2, ',', '.') }}
+
+                            <div class="small text-muted">
+                                {{ $compra->quantidade }} {{ $compra->unidade }}
+                                × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
+                            </div>
+                        </div>
+
+                        {{-- AÇÕES --}}
+                        <div class="d-flex gap-2 mt-3">
+
+                            <a href="{{ route('compras.edit', $compra->id) }}"
+                                class="btn btn-outline-dark btn-sm w-50">
+                                ✏️ Editar
+                            </a>
+
+                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST" class="w-50"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                    🗑️ Excluir
+                                </button>
+                            </form>
+
+                        </div>
+
                     </div>
-                @endif
-
-                {{-- QUANTIDADE --}}
-                <div class="small text-muted">
-                    {{ $compra->quantidade }} {{ $compra->unidade }}
                 </div>
 
-                {{-- MERCADO / CIDADE --}}
-                <div class="small text-muted">
-                    {{ $mercados->firstWhere('id', $compra->mercado_id)->nome_mercado ?? '-' }}
-                    —
-                    {{ $cidades->firstWhere('id', $compra->cidade_id)->nome_cidade ?? '-' }}
+            @empty
+                <div class="text-center text-muted py-4">
+                    Nenhum item cadastrado.
                 </div>
+            @endforelse
 
-                {{-- PREÇO --}}
-                <div class="fw-semibold text-success mt-2">
-                    R$ {{ number_format($compra->total, 2, ',', '.') }}
-
-                    <div class="small text-muted">
-                        {{ $compra->quantidade }} {{ $compra->unidade }}
-                        × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
-                    </div>
-                </div>
-
-                {{-- AÇÕES --}}
-                <div class="d-flex gap-2 mt-3">
-
-                    <a href="{{ route('compras.edit', $compra->id) }}"
-                       class="btn btn-outline-dark btn-sm w-50">
-                        ✏️ Editar
-                    </a>
-
-                    <form action="{{ route('compras.destroy', $compra->id) }}"
-                          method="POST" class="w-50">
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit"
-                                class="btn btn-outline-danger btn-sm w-100">
-                            🗑️ Excluir
-                        </button>
-                    </form>
-
-                </div>
-
-            </div>
         </div>
-
-    @empty
-        <div class="text-center text-muted py-4">
-            Nenhum item cadastrado.
-        </div>
-    @endforelse
-
-</div>
 
 
         {{-- ================= DESKTOP (TABELA) ================= --}}
@@ -174,7 +173,8 @@
                                             </a>
 
                                             {{-- Excluir --}}
-                                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST">
+                                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST"
+                                                onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                                 @csrf
                                                 @method('DELETE')
 

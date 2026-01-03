@@ -195,7 +195,8 @@
 
                                                 {{-- Excluir --}}
                                                 <form action="{{ route('avaliacao.destroy', $produto->id) }}"
-                                                    method="POST">
+                                                    method="POST"
+                                                    onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                                     @csrf
                                                     @method('DELETE')
 
