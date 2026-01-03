@@ -49,16 +49,20 @@ class ComprasController extends Controller
     }
 
 
-    public function store(ComprasFormRequest $request)
-    {
-        $request->merge([
-            'preco' => str_replace(',', '.', $request->preco)
-        ]);
-        $quantidade = $request->quantidade;
+ public function store(ComprasFormRequest $request)
+{
+    $request->merge([
+        'preco' => $request->filled('preco')
+            ? str_replace(',', '.', $request->preco)
+            : null
+    ]);
 
-        $compra = Compras::create($request->all());
-        return to_route('compras.index')->with('mensagem.sucesso', "O item {$compra->nome} foi adicionado");
-    }
+    $compra = Compras::create($request->all());
+
+    return to_route('compras.index')
+        ->with('mensagem.sucesso', "O item {$compra->nome} foi adicionado");
+}
+
 
 
     public function destroy(Compras $compra, Request $request)
@@ -83,14 +87,16 @@ class ComprasController extends Controller
 
     public function update(Compras $compra, ComprasFormRequest $request)
     {
-            $request->merge([
-            'preco' => str_replace(',', '.', $request->preco)
-        ]);
+             $request->merge([
+        'preco' => $request->filled('preco')
+            ? str_replace(',', '.', $request->preco)
+            : null
+    ]);
 
         $compra->fill($request->all());
         $compra->save();
 
-    
+
         return to_route('compras.index')->with('mensagem.sucesso', "Item {$compra->nome} Atualizado");
     }
 
