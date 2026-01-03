@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avaliacoes;
 use Illuminate\Http\Request;
 use App\Models\Compras;
 use App\Models\Despensa;
@@ -14,6 +15,7 @@ class HomeController extends Controller
 
         $totalItens = Compras::count();
         $totalDepensa = Despensa::count();
+        $totalAvaliacoes = Avaliacoes::count();
 
         $agora = Carbon::now()->locale('pt_BR');
 
@@ -26,6 +28,7 @@ class HomeController extends Controller
         return view('home.index_home')
         ->with('totalItens' , $totalItens)
         ->with('totalDespensa', $totalDepensa)
+        ->with('totalAvaliacoes', $totalAvaliacoes)
         ->with('validadeDespensa', $validadeDespensa)
         ->with('agora', $agora);
     }

@@ -192,7 +192,7 @@
 
             {{-- AVALIAÇÕES --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="{{ route('avaliacoes.index') }}" class="text-decoration-none">
+                <a href="{{ route('avaliacao.index') }}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -214,8 +214,8 @@
 
                             <p class="fw-bold h1 text-dark text-center ">
 
-                                
-                                {{ $totalItens }}
+
+                                {{ $totalAvaliacoes }}
                             </p>
                             {{-- <div class="text-center d-flex justify-content-center align-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
