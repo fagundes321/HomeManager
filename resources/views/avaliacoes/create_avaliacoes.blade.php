@@ -135,14 +135,16 @@
 
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
+
+                                 <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
                                 <a href="{{ route('avaliacao.index') }}"
                                     class="btn btn-outline-dark px-4 w-100 w-md-auto">
                                     Voltar
                                 </a>
 
-                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
-                                    Salvar
-                                </button>
+
                             </div>
 
                         </form>

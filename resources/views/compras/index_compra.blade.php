@@ -3,10 +3,7 @@
     <div class="container mt-4">
 
         {{-- HEADER --}}
-
-
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
-
             <h2 class="fw-bold text-dark m-0 text-center text-md-start">
                 Lista de Compras
             </h2>
@@ -20,11 +17,11 @@
                     + Nova Compra
                 </a>
 
-                <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark ">
+                <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark">
                     Mercados
                 </a>
 
-                <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark ">
+                <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark">
                     Cidades
                 </a>
             </div>
@@ -37,111 +34,129 @@
             </div>
         @endisset
 
-        {{-- TABELA --}}
-        <div class="card shadow-sm border border-dark">
-            <div class="card-body p-0">
+        {{-- ================= MOBILE (CARDS + MODAL) ================= --}}
+  <div class="d-md-none">
 
+    @forelse ($compras as $compra)
+        <div class="card shadow-sm border-dark mb-3">
+            <div class="card-body">
+
+                {{-- PRODUTO --}}
+                <div class="fw-bold fs-6 text-dark">
+                    {{ $compra->nome }}
+                </div>
+
+                {{-- MARCA --}}
+                @if($compra->marca)
+                    <div class="small text-muted">
+                        Marca: {{ $compra->marca }}
+                    </div>
+                @endif
+
+                {{-- QUANTIDADE --}}
+                <div class="small text-muted">
+                    {{ $compra->quantidade }} {{ $compra->unidade }}
+                </div>
+
+                {{-- MERCADO / CIDADE --}}
+                <div class="small text-muted">
+                    {{ $mercados->firstWhere('id', $compra->mercado_id)->nome_mercado ?? '-' }}
+                    —
+                    {{ $cidades->firstWhere('id', $compra->cidade_id)->nome_cidade ?? '-' }}
+                </div>
+
+                {{-- PREÇO --}}
+                <div class="fw-semibold text-success mt-2">
+                    R$ {{ number_format($compra->total, 2, ',', '.') }}
+
+                    <div class="small text-muted">
+                        {{ $compra->quantidade }} {{ $compra->unidade }}
+                        × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
+                    </div>
+                </div>
+
+                {{-- AÇÕES --}}
+                <div class="d-flex gap-2 mt-3">
+
+                    <a href="{{ route('compras.edit', $compra->id) }}"
+                       class="btn btn-outline-dark btn-sm w-50">
+                        ✏️ Editar
+                    </a>
+
+                    <form action="{{ route('compras.destroy', $compra->id) }}"
+                          method="POST" class="w-50">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit"
+                                class="btn btn-outline-danger btn-sm w-100">
+                            🗑️ Excluir
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    @empty
+        <div class="text-center text-muted py-4">
+            Nenhum item cadastrado.
+        </div>
+    @endforelse
+
+</div>
+
+
+        {{-- ================= DESKTOP (TABELA) ================= --}}
+        <div class="d-none d-md-block">
+            <div class="card shadow-sm border border-dark">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0 text-center">
-
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Item</th>
-                                <th class="d-none d-md-table-cell">Marca</th>
-                                <th class="d-none d-md-table-cell">Mercado</th>
-                                <th class="d-none d-md-table-cell">Cidade</th>
+                                <th class="text-start">Item</th>
+                                <th>Marca</th>
+                                <th>Mercado</th>
+                                <th>Cidade</th>
                                 <th>Qtd</th>
                                 <th>Total</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
 
-                        <tbody class="table-group-divider ">
-
+                        <tbody>
                             @forelse ($compras as $compra)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
 
-                                    <td class="fw-semibold text-start">
+                                    <td class="text-start fw-semibold">
                                         {{ $compra->nome }}
-
-                                        {{-- MOBILE INFO --}}
-                                        <div class="d-md-none small text-muted mt-1 lh-sm">
-
-
-                                            {{-- Marca --}}
-                                            @if ($compra->marca)
-                                                <div>
-                                                    <i class="bi bi-tag"></i>
-                                                    {{ $compra->marca }}
-                                                </div>
-                                            @endif
-
-                                            {{-- Mercado --}}
-                                            <div>
-                                                <i class="bi bi-shop"></i>
-                                                {{ $mercados->firstWhere('id', $compra->mercado_id)->nome_mercado ?? '-' }}
-                                            </div>
-
-                                            {{-- Cidade --}}
-                                            <div>
-                                                <i class="bi bi-geo-alt"></i>
-                                                {{ $cidades->firstWhere('id', $compra->cidade_id)->nome_cidade ?? '-' }}
-                                            </div>
-
-                                        </div>
                                     </td>
 
+                                    <td>{{ $compra->marca ?? '-' }}</td>
 
-                                    <td class="d-none d-md-table-cell text-muted">
-                                        {{ $compra->marca ?? '-' }}
-                                    </td>
-
-                                    <td class="d-none d-md-table-cell text-muted">
+                                    <td>
                                         {{ $mercados->firstWhere('id', $compra->mercado_id)->nome_mercado ?? '-' }}
                                     </td>
 
-                                    <td class="d-none d-md-table-cell text-muted">
+                                    <td>
                                         {{ $cidades->firstWhere('id', $compra->cidade_id)->nome_cidade ?? '-' }}
                                     </td>
 
-                                    <td class="text-muted small">
-                                        <span class="d-inline-block">
+                                    <td class="small text-muted">
+                                        {{ $compra->quantidade }} {{ $compra->unidade }}
+                                    </td>
+
+                                    <td class="fw-bold text-success">
+                                        R$ {{ number_format($compra->total, 2, ',', '.') }}
+                                        <div class="small text-muted">
                                             {{ $compra->quantidade }} {{ $compra->unidade }}
-                                        </span>
+                                            × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
+                                        </div>
                                     </td>
 
-                                    <td class="text-start">
-
-                                        {{-- DESKTOP (inalterado) --}}
-                                        <div class="d-none d-md-block fw-bold text-success text-center">
-                                            R$ {{ number_format($compra->total, 2, ',', '.') }}
-
-                                            <div class="small text-muted">
-                                                {{ $compra->quantidade }} {{ $compra->unidade }}
-                                                × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
-                                            </div>
-                                        </div>
-                                        {{-- MOBILE --}}
-                                        <div class="d-md-none small">
-
-                                            <div class="fw-semibold text-success">
-                                                R$ {{ number_format($compra->total, 2, ',', '.') }}
-                                            </div>
-
-                                            <div class="text-muted">
-                                                {{ $compra->quantidade }} {{ $compra->unidade }}
-                                                × {{ number_format((float) $compra->preco, 2, ',', '.') }}
-                                            </div>
-
-                                        </div>
-
-
-                                    </td>
-
-
-                                    {{-- AÇÕES --}}
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
 

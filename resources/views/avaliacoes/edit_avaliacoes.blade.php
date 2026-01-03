@@ -48,20 +48,16 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="categoria" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="Alimentos"
-                                                @selected(old('categoria', $avaliacao->categoria) === 'Alimentos')>
+                                                <option value="Alimentos" @selected(old('categoria', $avaliacao->categoria) === 'Alimentos')>
                                                     Alimentos
                                                 </option>
-                                                <option value="Bebidas"
-                                                @selected(old('categoria', $avaliacao->categoria) === 'Bebidas')>
+                                                <option value="Bebidas" @selected(old('categoria', $avaliacao->categoria) === 'Bebidas')>
                                                     Bebidas
                                                 </option>
-                                                <option value="Limpeza"
-                                                @selected(old('categoria', $avaliacao->categoria) === 'Limpeza')>
+                                                <option value="Limpeza" @selected(old('categoria', $avaliacao->categoria) === 'Limpeza')>
                                                     Limpeza
                                                 </option>
-                                                <option value="Higiene"
-                                                @selected(old('categoria', $avaliacao->categoria) === 'Higiene')>
+                                                <option value="Higiene" @selected(old('categoria', $avaliacao->categoria) === 'Higiene')>
                                                     Higiene
                                                 </option>
                                             </select>
@@ -82,16 +78,13 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="avaliacao" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="3"
-                                                @selected(old('avaliacao', $avaliacao->avaliacao) === 3)>
+                                                <option value="3" @selected(old('avaliacao', $avaliacao->avaliacao) === 3)>
                                                     Excelente
                                                 </option>
-                                                <option value="2"
-                                                @selected(old('avaliacao', $avaliacao->avaliacao) === 2)>
+                                                <option value="2" @selected(old('avaliacao', $avaliacao->avaliacao) === 2)>
                                                     Bom
                                                 </option>
-                                                <option value="1"
-                                                @selected(old('avaliacao', $avaliacao->avaliacao) === 1)>
+                                                <option value="1" @selected(old('avaliacao', $avaliacao->avaliacao) === 1)>
                                                     Ruim
                                                 </option>
                                             </select>
@@ -109,7 +102,7 @@
                                     </label>
 
                                     <textarea class="form-control border-dark" id="comentario" name="comentario" rows="4"
-                                        placeholder="Escreva sua opinião sobre o produto...">{{ old('comentario',$avaliacao->comentario) }}</textarea>
+                                        placeholder="Escreva sua opinião sobre o produto...">{{ old('comentario', $avaliacao->comentario) }}</textarea>
                                 </div>
 
 
@@ -124,7 +117,8 @@
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
                                             id="menor_preco" name="menor_preco" placeholder="0,00"
-                                            value="{{ old('menor_preco', $avaliacao->menor_preco) }}" oninput="formatarMoeda(this)">
+                                            value="{{ old('menor_preco', $avaliacao->menor_preco) }}"
+                                            oninput="formatarMoeda(this)">
                                     </div>
 
 
@@ -141,7 +135,8 @@
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
                                             id="maior_preco" name="maior_preco" placeholder="0,00"
-                                            value="{{ old('maior_preco', $avaliacao->maior_preco) }}" oninput="formatarMoeda(this)">
+                                            value="{{ old('maior_preco', $avaliacao->maior_preco) }}"
+                                            oninput="formatarMoeda(this)">
                                     </div>
 
 
@@ -156,14 +151,13 @@
 
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
                                 <a href="{{ route('avaliacao.index') }}"
                                     class="btn btn-outline-dark px-4 w-100 w-md-auto">
                                     Voltar
                                 </a>
-
-                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
-                                    Salvar
-                                </button>
                             </div>
 
                         </form>
