@@ -32,6 +32,7 @@
                                     <th>Nome</th>
                                     <th class="d-none d-md-table-cell">Marca</th>
                                     <th class="d-none d-md-table-cell">Quantidade</th>
+                                    <th>Dias para vencer</th>
                                     <th class="d-none d-md-table-cell">Validade</th>
                                     <th>Ações</th>
                                 </tr>
@@ -39,10 +40,20 @@
 
                             <tbody>
                                 @foreach ($itens as $item)
-                                    <tr>
+                                    @php
+                                        $diasParaVencer = explode('.', now()->diffInDays($item->validade, false))[0];
+                                    @endphp
+                                    <tr
+                                        class="
+                                            @if ($diasParaVencer < 20) table-danger
+                                            @elseif ($diasParaVencer <= 40)
+                                                table-warning
+                                            @elseif ($diasParaVencer <= 60)
+                                                table-info @endif
+                                        ">
                                         <td>{{ $loop->iteration }}</td>
 
-                                        <td class="fw-semibold">
+                                        <td class="fw-semibold ">
                                             {{ $item->nome }}
 
                                             <div class="d-md-none small text-muted">
@@ -57,13 +68,56 @@
                                         <td class="d-none d-md-table-cell">
                                             {{ $item->quantidade }}
                                         </td>
+                                        <td>
 
+                                            @if ($item->validade == '')
+                                                -
+                                            @else
+                                                @if ($diasParaVencer < 0)
+                                                    Vencido há {{ abs($diasParaVencer) }} dias
+                                                @else
+                                                    {{ $diasParaVencer }}
+                                                @endif
+
+                                            @endif
+
+                                        </td>
                                         <td class="d-none d-md-table-cell">
+                                            @if ($item->validade == '')
+                                                -
+                                            @else
                                             {{ $item->validade?->format('d/m/Y') }}
+
+                                            @endif
                                         </td>
 
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
+
+
+                                                <form action="{{ route('despensa.decrement', $item) }}"
+                                                    method="POST"
+                                                    class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
+                                                    title="Editar" style="width: 36px; height: 36px;"
+                                                    @if ($item->quantidade > 1)
+                                                         onsubmit="return confirm('Deseja excluir 1 Produto?')"
+                                                    @else
+                                                        onsubmit="return confirm('Deseja excluir Produto definitivamente?')"
+                                                     @endif
+
+                                                    >
+                                                       @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-pencil-square">
+                                                        <path
+                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                        <path
+                                                            d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                    </svg>
+                                                    </button>
+                                                </form>
 
                                                 {{-- Editar --}}
                                                 <a href="{{ route('despensa.edit', $item->id) }}"

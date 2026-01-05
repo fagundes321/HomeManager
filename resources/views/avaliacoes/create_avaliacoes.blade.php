@@ -70,6 +70,7 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="avaliacao" required>
                                                 <option value="" disabled selected>Selecione</option>
+                                                <option value="0">Avaliando</option>
                                                 <option value="3">Excelente</option>
                                                 <option value="2">Bom</option>
                                                 <option value="1">Ruim</option>

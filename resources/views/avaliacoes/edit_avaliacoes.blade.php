@@ -78,6 +78,9 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="avaliacao" required>
                                                 <option value="" disabled selected>Selecione</option>
+                                                 <option value="0" @selected(old('avaliacao', $avaliacao->avaliacao) === 0)>
+                                                    Avaliando
+                                                </option>
                                                 <option value="3" @selected(old('avaliacao', $avaliacao->avaliacao) === 3)>
                                                     Excelente
                                                 </option>
@@ -87,6 +90,7 @@
                                                 <option value="1" @selected(old('avaliacao', $avaliacao->avaliacao) === 1)>
                                                     Ruim
                                                 </option>
+
                                             </select>
 
 

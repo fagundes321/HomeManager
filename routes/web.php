@@ -18,6 +18,8 @@ Route::resource('/compras', ComprasController::class)->except(['show']);
 Route::resource('/mercado', MercadosController::class)->except(['show']);
 Route::resource('/cidades', CidadesController::class)->except(['show']);
 Route::resource('/despensa', DespensaController::class)->except(['show']);
+Route::patch('/despensa/{despensa}/decrement', [DespensaController::class, 'decrement'])->name('despensa.decrement');
+
 Route::resource('/avaliacao', AvaliacoesController::class)->except(['show']);
 Route::resource('/favoritos', FavoritosController::class)->except(['show']);
 // Route::get('/compras/editar/{compra}', [ComprasController::class, 'edit'])->name('compras.edit');

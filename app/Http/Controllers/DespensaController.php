@@ -14,7 +14,7 @@ class DespensaController extends Controller
     public function index()
     {
 
-        $despensa = Despensa::All();
+    $despensa = Despensa::All();
        $despensa = Despensa::orderByRaw("
             CASE
                 WHEN local = 'Despensa' THEN 1
@@ -34,8 +34,11 @@ class DespensaController extends Controller
         ->get()
         ->groupBy('local');
 
+
+
         return view('despensa.index_despensa', compact('despensa'))
-            ->with('despensa', $despensa);
+            ->with('despensa', $despensa)
+            ;
     }
 
 
@@ -81,6 +84,17 @@ public function destroy(Despensa $despensa)
     return to_route('despensa.index');
 }
 
+
+ public function decrement(Despensa $despensa){
+
+   $despensa->decrementQuantidade();
+
+
+    return back();
+
+    // return to_route('despensa.index');
+
+}
 
 
 }

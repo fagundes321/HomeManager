@@ -76,24 +76,22 @@
                         </div>
 
                         {{-- AÇÕES --}}
-                        <div class="d-flex gap-2 mt-3">
+                    <div class="d-flex gap-2 mt-3">
+                                <a href="{{ route('compras.edit', $compra->id) }}"
+                                    class="btn btn-outline-dark btn-sm w-50">
+                                    Editar
+                                </a>
 
-                            <a href="{{ route('compras.edit', $compra->id) }}"
-                                class="btn btn-outline-dark btn-sm w-50">
-                                ✏️ Editar
-                            </a>
-
-                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST" class="w-50"
-                                onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                    🗑️ Excluir
-                                </button>
-                            </form>
-
-                        </div>
+                                <form action="{{ route('compras.destroy', $compra->id) }}" method="POST"
+                                    class="w-50"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
 
                     </div>
                 </div>
