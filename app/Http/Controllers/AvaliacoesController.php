@@ -46,6 +46,7 @@ class AvaliacoesController extends Controller
     {
 
         $dados = [
+            'favorito' => 0,
             'produto' => $request->produto,
             'marca' => $request->marca,
             'categoria' => $request->categoria,
@@ -105,5 +106,33 @@ class AvaliacoesController extends Controller
 
     return to_route('avaliacao.index');
 }
+
+
+ public function favorite(Avaliacoes $avaliacao, Request $request){
+
+    $statusFavorito = $avaliacao->favorito;
+
+    if($statusFavorito == 0){
+        $request->merge([
+            'favorito' => 1
+        ]);
+
+        $avaliacao->fill($request->all());
+        $avaliacao->save();
+
+        return back();
+    }else{
+        $request->merge([
+            'favorito' => 0
+        ]);
+
+        $avaliacao->fill($request->all());
+        $avaliacao->save();
+
+        return back();
+    }
+
+}
+
 
 }
