@@ -2,22 +2,24 @@
 
     <div class="container mt-4">
 
-        {{-- BOTÕES --}}
-        <div class="d-flex justify-content-between mb-4">
-            <a href="{{ route('index') }}" class="btn btn-outline-dark">
-                <i class="bi bi-arrow-left"></i> Menu
-            </a>
-
-            <a href="{{ route('avaliacao.create') }}" class="btn btn-dark">
-                + Novo Produto
-            </a>
-        </div>
-
         @forelse ($avaliacoes as $categoria => $produtos)
+            {{-- BOTÕES --}}
+            <div class="d-flex bd-highlight ">
 
-            <h4 class="fw-bold text-dark mt-4 mb-3">
-                {{ $categoria }}
-            </h4>
+                <h4 class="fw-bold text-dark  mb-3 p-2 flex-grow-1 bd-highlight">
+                    {{ $categoria }}
+                </h4>
+                <div class=" flex-row p-2 bd-highlight">
+                    <a href="{{ route('index') }}" class="btn btn-outline-dark mr-2">
+                        <i class="bi bi-arrow-left"></i> Menu
+                    </a>
+
+                    <a href="{{ route('avaliacao.create') }}" class="btn btn-dark">
+                        + Novo Produto
+                    </a>
+                </div>
+            </div>
+
 
             {{-- ================= MOBILE (CARDS) ================= --}}
             <div class="d-md-none">

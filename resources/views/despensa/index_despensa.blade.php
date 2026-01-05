@@ -2,23 +2,25 @@
 
     <div class="container mt-4">
 
-        {{-- BOTÕES --}}
-        <div class="d-flex justify-content-between mb-4">
-            <a href="{{ route('index') }}" class="btn btn-outline-dark">
-                <i class="bi bi-arrow-left"></i> Menu
-            </a>
-
-            <a href="{{ route('despensa.create') }}" class="btn btn-dark">
-                + Novo Item
-            </a>
-        </div>
-
         @forelse ($despensa as $local => $itens)
+            <div class="d-flex bd-highlight">
+                {{-- TÍTULO DO LOCAL --}}
+                <h2 class="fw-bold text-dark  mb-3 p-2 flex-grow-1 bd-highlight">
+                    {{ $local }}
+                </h2>
+                {{-- BOTÕES --}}
+                <div class="flex-row p-2 bd-highlight">
+                    <a href="{{ route('index') }}" class="btn btn-outline-dark">
+                        <i class="bi bi-arrow-left"></i> Menu
+                    </a>
 
-            {{-- TÍTULO DO LOCAL --}}
-            <h2 class="fw-bold text-dark mt-4 mb-3">
-                {{ $local }}
-            </h2>
+                    <a href="{{ route('despensa.create') }}" class="btn btn-dark">
+                        + Novo Item
+                    </a>
+                </div>
+            </div>
+
+
 
             {{-- TABELA --}}
             <div class="card shadow-sm border border-dark mb-4">
@@ -78,7 +80,6 @@
                                                 @else
                                                     {{ $diasParaVencer }}
                                                 @endif
-
                                             @endif
 
                                         </td>
@@ -86,8 +87,7 @@
                                             @if ($item->validade == '')
                                                 -
                                             @else
-                                            {{ $item->validade?->format('d/m/Y') }}
-
+                                                {{ $item->validade?->format('d/m/Y') }}
                                             @endif
                                         </td>
 
@@ -95,27 +95,23 @@
                                             <div class="d-flex justify-content-center gap-2">
 
 
-                                                <form action="{{ route('despensa.decrement', $item) }}"
-                                                    method="POST"
+                                                <form action="{{ route('despensa.decrement', $item) }}" method="POST"
                                                     class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
                                                     title="Editar" style="width: 36px; height: 36px;"
-                                                    @if ($item->quantidade > 1)
-                                                         onsubmit="return confirm('Deseja excluir 1 Produto?')"
+                                                    @if ($item->quantidade > 1) onsubmit="return confirm('Deseja excluir 1 Produto?')"
                                                     @else
-                                                        onsubmit="return confirm('Deseja excluir Produto definitivamente?')"
-                                                     @endif
-
-                                                    >
-                                                       @csrf
+                                                        onsubmit="return confirm('Deseja excluir Produto definitivamente?')" @endif>
+                                                    @csrf
                                                     @method('PATCH')
                                                     <button type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor" class="bi bi-pencil-square">
-                                                        <path
-                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path
-                                                            d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                                                    </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-pencil-square">
+                                                            <path
+                                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                            <path
+                                                                d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                        </svg>
                                                     </button>
                                                 </form>
 
@@ -168,6 +164,7 @@
             {{-- RESUMO DO LOCAL --}}
             <div class="mb-4 text-end text-muted">
                 Total de itens em {{ $local }}:
+
                 <strong>{{ $itens->count() }}</strong>
             </div>
 
