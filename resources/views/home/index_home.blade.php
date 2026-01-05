@@ -74,7 +74,9 @@
 
             {{-- FINANCEIRO --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a target="__blank" href="https://docs.google.com/spreadsheets/d/10vU2tjXz1vMTUuc5hYZxvgB8S9BGtawPrsLBLoXvaXg/edit?gid=1169939068#gid=1169939068" class="text-decoration-none">
+                <a target="__blank"
+                    href="https://docs.google.com/spreadsheets/d/10vU2tjXz1vMTUuc5hYZxvgB8S9BGtawPrsLBLoXvaXg/edit?gid=1169939068#gid=1169939068"
+                    class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -163,8 +165,8 @@
                                 </svg>
 
                                 <p class="mb-0">
-                                  Próximo vencimento:
-{{ $validadeDespensa?->validade?->format('d/m/Y') ?? 'Sem validade' }}
+                                    Próximo vencimento:
+                                    {{ $validadeDespensa?->validade?->format('d/m/Y') ?? 'Sem validade' }}
 
                                 </p>
                             </div>
@@ -260,27 +262,25 @@
 
             {{-- FAVORITOS --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="{{route('favoritos.index')}}" class="text-decoration-none">
+                <a href="{{ route('favoritos.index') }}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                 fill="currentColor" class="bi bi-cart4 me-2" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 4.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0zm3.5.878c1.482-1.42 4.795 1.392 0 4.622-4.795-3.23-1.482-6.043 0-4.622M2.5 5a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z" />
-                                <path fill-rule="evenodd"
-                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z" />
-
+                                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+  <path d="m8 3.293 4.712 4.712A4.5 4.5 0 0 0 8.758 15H3.5A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.707l.547.547 1.17-1.951a.5.5 0 1 1 .858.514"/>
 
                             </svg>
 
-                            <h2 class="fw-bold mb-0 text-dark">Favoritos</h2>
+                            <h2 class="fw-bold mb-0 text-dark">Essenciais</h2>
                         </div>
 
                         <hr>
                         <div class="card-body text-center ">
 
                             <p class="fw-bold h5 text-dark text-center">
-                                Itens Frequentes
+                                Itens fixos do mês
                             </p>
 
                             <p class="fw-bold h1 text-dark text-center ">
@@ -310,14 +310,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                     fill="currentColor" class="bi bi-cart4 me-2 " viewBox="0 0 16 16">
 
-                                    <path
-                                        d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1" />
+                                    <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
                                 </svg>
 
                                 </svg>
                                 <h5 class="fw-bold mb-0 ">
 
-                                    Ver avaliações
+                                    Gerenciar essenciais
                                 </h5>
                             </div>
 
