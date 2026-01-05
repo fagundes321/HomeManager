@@ -15,4 +15,13 @@ class Despensa extends Model
     'validade' => 'date',
 ];
 
+ public function decrementQuantidade()
+    {
+        if ($this->quantidade > 1) {
+            $this->decrement('quantidade');
+        } else {
+            $this->delete();
+        }
+    }
+
 }

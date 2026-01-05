@@ -40,6 +40,7 @@
                             {{-- AVALIAÇÃO --}}
                             @php
                                 $avaliacoesBadge = [
+                                    0 => ['Avaliando', 'secondary'],
                                     1 => ['Ruim', 'danger'],
                                     2 => ['Bom', 'primary'],
                                     3 => ['Excelente', 'success'],
@@ -87,7 +88,8 @@
                                 </a>
 
                                 <form action="{{ route('avaliacao.destroy', $produto->id) }}" method="POST"
-                                    class="w-50">
+                                    class="w-50"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger btn-sm w-100">
