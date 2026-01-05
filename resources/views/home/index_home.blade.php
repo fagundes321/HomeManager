@@ -260,7 +260,7 @@
 
             {{-- FAVORITOS --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="#" class="text-decoration-none">
+                <a href="{{route('favoritos.index')}}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
