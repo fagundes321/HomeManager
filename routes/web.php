@@ -21,6 +21,9 @@ Route::resource('/despensa', DespensaController::class)->except(['show']);
 Route::patch('/despensa/{despensa}/decrement', [DespensaController::class, 'decrement'])->name('despensa.decrement');
 
 Route::resource('/avaliacao', AvaliacoesController::class)->except(['show']);
+Route::patch('/avaliacao/{avaliacao}/favorite', [AvaliacoesController::class, 'favorite'])->name('avaliacao.favorite');
+
+
 Route::resource('/favoritos', FavoritosController::class)->except(['show']);
 // Route::get('/compras/editar/{compra}', [ComprasController::class, 'edit'])->name('compras.edit');
 // Route::get('/compras/update/{compra}', [ComprasController::class,  'update'])->name('compras.update');
