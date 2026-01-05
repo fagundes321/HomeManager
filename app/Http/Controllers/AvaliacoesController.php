@@ -17,16 +17,23 @@ class AvaliacoesController extends Controller
 
         $avaliacoes = Avaliacoes::orderByRaw("
             CASE
-                WHEN categoria = 'Alimentos' THEN 1
-                WHEN categoria = 'Bebidas' THEN 2
-                WHEN categoria = 'Higiene' THEN 3
-                WHEN categoria = 'Limpeza' THEN 4
-                ELSE 5
+                WHEN favorito = 1 THEN 0
+                ELSE 1
             END
         ")
+            ->orderByRaw("
+    CASE
+        WHEN categoria = 'Alimentos' THEN 1
+        WHEN categoria = 'Bebidas' THEN 2
+        WHEN categoria = 'Higiene' THEN 3
+        WHEN categoria = 'Limpeza' THEN 4
+        ELSE 5
+    END
+")
             ->orderBy('produto')
             ->get()
             ->groupBy('categoria');
+
 
 
 
@@ -85,54 +92,52 @@ class AvaliacoesController extends Controller
     }
 
 
-  public function update(Request $request, Avaliacoes $avaliacao)
-{
-    $request->merge([
-
-
-        'menor_preco' => $request->filled('menor_preco')
-            ? str_replace(',', '.', $request->menor_preco)
-            : null,
-
-        'maior_preco' => $request->filled('maior_preco')
-            ? str_replace(',', '.', $request->maior_preco)
-            : null,
-
-        'data_avaliacao' => now(),
-    ]);
-
-    $avaliacao->fill($request->all());
-    $avaliacao->save();
-
-    return to_route('avaliacao.index');
-}
-
-
- public function favorite(Avaliacoes $avaliacao, Request $request){
-
-    $statusFavorito = $avaliacao->favorito;
-
-    if($statusFavorito == 0){
+    public function update(Request $request, Avaliacoes $avaliacao)
+    {
         $request->merge([
-            'favorito' => 1
+
+
+            'menor_preco' => $request->filled('menor_preco')
+                ? str_replace(',', '.', $request->menor_preco)
+                : null,
+
+            'maior_preco' => $request->filled('maior_preco')
+                ? str_replace(',', '.', $request->maior_preco)
+                : null,
+
+            'data_avaliacao' => now(),
         ]);
 
         $avaliacao->fill($request->all());
         $avaliacao->save();
 
-        return back();
-    }else{
-        $request->merge([
-            'favorito' => 0
-        ]);
-
-        $avaliacao->fill($request->all());
-        $avaliacao->save();
-
-        return back();
+        return to_route('avaliacao.index');
     }
 
-}
 
+    public function favorite(Avaliacoes $avaliacao, Request $request)
+    {
 
+        $statusFavorito = $avaliacao->favorito;
+
+        if ($statusFavorito == 0) {
+            $request->merge([
+                'favorito' => 1
+            ]);
+
+            $avaliacao->fill($request->all());
+            $avaliacao->save();
+
+            return back();
+        } else {
+            $request->merge([
+                'favorito' => 0
+            ]);
+
+            $avaliacao->fill($request->all());
+            $avaliacao->save();
+
+            return back();
+        }
+    }
 }
