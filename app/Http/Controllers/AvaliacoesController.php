@@ -24,8 +24,11 @@ class AvaliacoesController extends Controller
                 ELSE 5
             END
         ")
+            ->orderBy('produto')
             ->get()
             ->groupBy('categoria');
+
+
 
         return view('avaliacoes.index_avaliacoes')
             ->with('avaliacoes', $avaliacoes);
