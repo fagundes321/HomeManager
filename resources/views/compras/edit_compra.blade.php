@@ -70,17 +70,39 @@
 
                                         <select class="form-select border-dark" name="unidade"
                                             style="max-width: 160px;">
-                                            <option value="" disabled selected>
+                                            <option value="" disabled>
                                                 Selecione
                                             </option>
-                                            <option value="un">unidade</option>
-                                            <option value="kg">Quilo</option>
-                                            <option value="g">Grama</option>
-                                            <option value="L">Litro</option>
-                                            <option value="ml">Mililitro</option>
-                                            <option value="pct">Pacote</option>
-                                            <option value="cx">Caixa</option>
+
+                                            <option value="un" @selected(old('unidade', $compra->unidade) == 'un')>
+                                                Unidade
+                                            </option>
+
+                                            <option value="kg" @selected(old('unidade', $compra->unidade) == 'kg')>
+                                                Quilo
+                                            </option>
+
+                                            <option value="g" @selected(old('unidade', $compra->unidade) == 'g')>
+                                                Grama
+                                            </option>
+
+                                            <option value="L" @selected(old('unidade', $compra->unidade) == 'L')>
+                                                Litro
+                                            </option>
+
+                                            <option value="ml" @selected(old('unidade', $compra->unidade) == 'ml')>
+                                                Mililitro
+                                            </option>
+
+                                            <option value="pct" @selected(old('unidade', $compra->unidade) == 'pct')>
+                                                Pacote
+                                            </option>
+
+                                            <option value="cx" @selected(old('unidade', $compra->unidade) == 'cx')>
+                                                Caixa
+                                            </option>
                                         </select>
+
 
                                     </div>
                                 </div>
