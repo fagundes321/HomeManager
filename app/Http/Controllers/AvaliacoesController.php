@@ -22,14 +22,14 @@ class AvaliacoesController extends Controller
             END
         ")
             ->orderByRaw("
-    CASE
-        WHEN categoria = 'Alimentos' THEN 1
-        WHEN categoria = 'Bebidas' THEN 2
-        WHEN categoria = 'Higiene' THEN 3
-        WHEN categoria = 'Limpeza' THEN 4
-        ELSE 5
-    END
-")
+            CASE
+                WHEN categoria = 'Alimentos' THEN 1
+                WHEN categoria = 'Bebidas' THEN 2
+                WHEN categoria = 'Higiene' THEN 3
+                WHEN categoria = 'Limpeza' THEN 4
+                ELSE 5
+            END
+        ")
             ->orderBy('produto')
             ->get()
             ->groupBy('categoria');
