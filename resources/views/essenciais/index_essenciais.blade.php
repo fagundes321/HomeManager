@@ -51,7 +51,17 @@
                                             </div>
                                         </td>
                                         <td>
-                                            {{ (int) $item->quantidade }}
+                                            @php
+                                                $unidadesEspeciais = ['kg', 'l'];
+                                                $temDecimal = fmod($item->quantidade, 1) != 0
+                                            @endphp
+
+                                            @if (in_array($item->unidade, $unidadesEspeciais) && $temDecimal)
+                                                {{  number_format($item->quantidade, 1, '.', '') }} {{$item->unidade}}
+                                            @else
+                                            {{ (int) $item->quantidade }} {{$item->unidade}}
+
+                                            @endif
 
                                         </td>
 
@@ -80,7 +90,7 @@
                                                 </a>
 
                                                 {{-- Excluir --}}
-                                                <form action="{{-- route('despensa.destroy', $item->id) --}}" method="POST"
+                                                <form action="{{ route('essenciais.destroy', $item->id) }}" method="POST"
                                                     onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                                     @csrf
                                                     @method('DELETE')

@@ -36,22 +36,39 @@
 
 
 
-                                {{-- Quantidade --}}
-                                <div class="col-12 col-md-3">
-                                    <label for="quantidade" class="form-label fw-semibold text-dark">
+                                 {{-- Quantidade + Unidade --}}
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label fw-semibold text-dark">
                                         Quantidade
                                     </label>
-                                    <input
-                                        required
-                                        type="number"
-                                        step="0"
-                                        min="0"
-                                        id="quantidade"
-                                        name="quantidade"
-                                        class="form-control border-dark"
-                                        placeholder="Qtd"
-                                        value="{{ old('quantidade') }}"
-                                    >
+
+                                    <div class="row g-2">
+                                        <div class="col-7">
+                                            <input
+                                                required
+                                                type="number"
+                                                step="0.01"
+                                                min="0"
+                                                class="form-control border-dark"
+                                                name="quantidade"
+                                                placeholder="Qtd"
+                                                value="{{ old('quantidade') }}"
+                                            >
+                                        </div>
+
+                                        <div class="col-5">
+                                            <select class="form-select border-dark" name="unidade" required>
+                                                <option value="" disabled selected>Un.</option>
+                                                <option value="un">Unidade</option>
+                                                <option value="kg">Quilo</option>
+                                                <option value="g">Grama</option>
+                                                <option value="L">Litro</option>
+                                                <option value="ml">Mililitro</option>
+                                                <option value="pct">Pacote</option>
+                                                <option value="cx">Caixa</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -82,7 +99,7 @@
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
                                 <a
-                                    href="{{ route('despensa.index') }}"
+                                    href="{{ route('essenciais.index') }}"
                                     class="btn btn-outline-dark px-4 w-100 w-md-auto"
                                 >
                                     Voltar

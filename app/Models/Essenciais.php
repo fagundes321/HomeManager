@@ -11,6 +11,7 @@ class Essenciais extends Model
     protected $fillable = [
         'nome',
         'quantidade',
+        'unidade',
         'local'
     ];
 

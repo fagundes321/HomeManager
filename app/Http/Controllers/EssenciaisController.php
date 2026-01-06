@@ -46,11 +46,33 @@ class EssenciaisController extends Controller
 
 
 
-     public function edit(Essenciais $essenciais){
+     public function edit(Essenciais $essenciai){
 
         return view('essenciais.edit_essenciais')
-        ->with('essenciais', $essenciais);
+        ->with('essenciai', $essenciai);
 
     }
+
+
+     public function update(Essenciais $essenciai, Request $request){
+
+        $essenciai->fill($request->all());
+
+        $essenciai->save();
+
+        return to_route('essenciais.index');
+
+    }
+
+
+
+     public function destroy(Essenciais $essenciai){
+
+        $essenciai->delete();
+
+        return back();
+
+    }
+
 
 }
