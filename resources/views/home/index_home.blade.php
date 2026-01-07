@@ -94,12 +94,14 @@
                         <div class="card-body text-center ">
 
                             <p class="fw-bold h5 text-dark text-center">
-                                Em caixa: <span class="text-success h2">R$ 1000</span>
+
+                                Controle financeiro feito via planilha externa
                             </p>
 
-                            <p class="fw-bold h5 text-dark text-center">
-                                Total Gasto: <span class="text-danger h2">R$ 400</span>
                             </p>
+
+                            <span class="badge bg-secondary">Planilha Google</span>
+
 
 
                             <p class="fw-bold h1 text-dark text-center ">
@@ -287,7 +289,7 @@
 
                             <p class="fw-bold h1 text-dark text-center ">
 
-                                {{ $totalItens }}
+                                {{ $totalEssenciais }}
                             </p>
                             {{-- <div class="text-center d-flex justify-content-center align-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -342,39 +344,20 @@
 
                             </svg>
 
-                            <h2 class="fw-bold mb-0 text-dark">Histórico</h2>
+                            <h2 class="fw-bold mb-0 text-dark">Manutenções</h2>
                         </div>
 
                         <hr>
                         <div class="card-body text-center ">
 
-                            <p class="fw-bold h5 text-dark text-center">
-                                Última ação
+
+                            <p class="fw-semibold h5 text-dark mb-2">
+                                Casa & Carro
                             </p>
 
-                            <p class="fw-bold h1 text-dark text-center ">
-
-                                Teste
-
+                            <p class="text-muted mb-5 h5">
+                                Controle de manutenções periódicas
                             </p>
-                            {{-- <div class="text-center d-flex justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    fill="currentColor" viewBox="0 0 16 16" class="me-2"
-                                    style="stroke: currentColor; stroke-width: 0.6;">
-
-                                    <path
-                                        d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z" />
-                                    <path
-                                        d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-
-                                </svg>
-
-                                <p class="mb-0">
-                                    Próximo vencimento: 15/04/2026
-                                </p>
-                            </div> --}}
-
-
                             <div
                                 class="text-white bg-dark text-center d-flex justify-content-center align-items-center p-2 rounded mt-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -388,9 +371,8 @@
                                 </svg>
 
                                 </svg>
-                                <h5 class="fw-bold mb-0 ">
-
-                                    Ver histórico
+                                <h5 class="fw-bold mb-0">
+                                    Ver manutenções
                                 </h5>
                             </div>
 
