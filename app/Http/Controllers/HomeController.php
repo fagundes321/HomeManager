@@ -6,6 +6,7 @@ use App\Models\Avaliacoes;
 use Illuminate\Http\Request;
 use App\Models\Compras;
 use App\Models\Despensa;
+use App\Models\Essenciais;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -16,7 +17,7 @@ class HomeController extends Controller
         $totalItens = Compras::count();
         $totalDepensa = Despensa::count();
         $totalAvaliacoes = Avaliacoes::count();
-
+        $totalEssenciais = Essenciais::count();
         $agora = Carbon::now()->locale('pt_BR');
 
      $validadeDespensa = Despensa::whereNotNull('validade')
@@ -30,6 +31,7 @@ class HomeController extends Controller
         ->with('totalDespensa', $totalDepensa)
         ->with('totalAvaliacoes', $totalAvaliacoes)
         ->with('validadeDespensa', $validadeDespensa)
+        ->with('totalEssenciais', $totalEssenciais)
         ->with('agora', $agora);
     }
 
