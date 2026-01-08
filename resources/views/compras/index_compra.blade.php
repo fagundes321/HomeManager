@@ -37,46 +37,76 @@
         {{-- ================= MOBILE (CARDS + MODAL) ================= --}}
         <div class="d-md-none">
 
-            @forelse ($compras as $compra)
-                <div class="card shadow-sm border-dark mb-3">
-                    <div class="card-body">
+            {{-- COM MERCADO --}}
+            @forelse ($mercados as $mercado)
 
-                        {{-- PRODUTO --}}
-                        <div class="fw-bold fs-6 text-dark">
-                            {{ $compra->nome }}
-                        </div>
+                @php
+                    $comprasDoMercado = $compras->where('mercado_id', $mercado->id);
+                @endphp
 
-                        {{-- MARCA --}}
-                        @if ($compra->marca)
-                            <div class="small text-muted">
-                                Marca: {{ $compra->marca }}
+                @if ($comprasDoMercado->count())
+                    <h5 class="fw-bold text-dark mt-4 mb-2">
+                        {{ $mercado->nome_mercado }}
+                    </h5>
+                @endif
+
+                @foreach ($comprasDoMercado as $compra)
+                    @php
+                        $cidade = $cidades->firstWhere('id', $compra->cidade_id);
+                    @endphp
+
+                    <div class="card shadow-sm border-dark mb-3">
+                        <div class="card-body">
+
+                            <div class="fw-bold fs-6 text-dark">
+                                {{ $compra->nome }}
                             </div>
-                        @endif
 
-                        {{-- QUANTIDADE --}}
-                        <div class="small text-muted">
-                            {{ $compra->quantidade }} {{ $compra->unidade }}
-                        </div>
-
-                        {{-- MERCADO / CIDADE --}}
-                        <div class="small text-muted">
-                            {{ $mercados->firstWhere('id', $compra->mercado_id)->nome_mercado ?? '-' }}
-                            —
-                            {{ $cidades->firstWhere('id', $compra->cidade_id)->nome_cidade ?? '-' }}
-                        </div>
-
-                        {{-- PREÇO --}}
-                        <div class="fw-semibold text-success mt-2">
-                            R$ {{ number_format($compra->total, 2, ',', '.') }}
+                            @if ($compra->marca)
+                                <div class="small text-muted">
+                                    Marca: {{ $compra->marca }}
+                                </div>
+                            @endif
 
                             <div class="small text-muted">
-                                {{ $compra->quantidade }} {{ $compra->unidade }}
-                                × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
-                            </div>
-                        </div>
+                                   @php
+                                            $unidadesEspeciais = ['kg', 'l'];
+                                            $temDecimal = fmod($compra->quantidade, 1) != 0;
+                                        @endphp
 
-                        {{-- AÇÕES --}}
-                    <div class="d-flex gap-2 mt-3">
+                                        @if (in_array($compra->unidade, $unidadesEspeciais) && $temDecimal)
+                                            {{ number_format($compra->quantidade, 1, '.', '') }}
+                                            {{ $compra->unidade }}
+                                        @else
+                                            {{ (int) $compra->quantidade }} {{ $compra->unidade }}
+                                        @endif
+                            </div>
+
+                            <div class="small text-muted">
+                                {{ $mercado->nome_mercado }}
+                                @if ($cidade)
+                                    — {{ $cidade->nome_cidade }}
+                                @endif
+                            </div>
+
+                            <div class="fw-semibold text-success mt-2">
+
+
+                                <td class="fw-bold text-success">
+                                    R$ {{ number_format($compra->total, 2, ',', '.') }}
+                                    <div class="small text-muted">
+                                          @if (in_array($compra->unidade, $unidadesEspeciais) && $temDecimal)
+                                            {{ number_format($compra->quantidade, 1, '.', '') }}
+                                            {{ $compra->unidade }}
+                                        @else
+                                            {{ (int) $compra->quantidade }} {{ $compra->unidade }}
+                                        @endif
+                                        × R$ {{ number_format((float) $compra->preco, 2, ',', '.') }}
+                                    </div>
+                                </td>
+                            </div>
+
+                            <div class="d-flex gap-2 mt-3">
                                 <a href="{{ route('compras.edit', $compra->id) }}"
                                     class="btn btn-outline-dark btn-sm w-50">
                                     Editar
@@ -93,8 +123,9 @@
                                 </form>
                             </div>
 
+                        </div>
                     </div>
-                </div>
+                @endforeach
 
             @empty
                 <div class="text-center text-muted py-4">
@@ -102,7 +133,57 @@
                 </div>
             @endforelse
 
+            {{-- SEM MERCADO --}}
+            @php
+                $comprasSemMercado = $compras->whereNull('mercado_id');
+            @endphp
+
+            @if ($comprasSemMercado->count())
+                <h5 class="fw-bold text-dark mt-4 mb-2">
+                    Sem mercado
+                </h5>
+
+                @foreach ($comprasSemMercado as $compra)
+                    @php
+                        $cidade = $cidades->firstWhere('id', $compra->cidade_id);
+                    @endphp
+
+                    <div class="card shadow-sm border-dark mb-3">
+                        <div class="card-body">
+
+                            <div class="fw-bold fs-6">
+                                {{ $compra->nome }}
+                            </div>
+
+                            <div class="small text-muted">
+
+
+                                        @if (in_array($compra->unidade, $unidadesEspeciais) && $temDecimal)
+                                            {{ number_format($compra->quantidade, 1, '.', '') }}
+                                            {{ $compra->unidade }}
+                                        @else
+                                            {{ (int) $compra->quantidade }} {{ $compra->unidade }}
+                                        @endif
+                            </div>
+
+                            <div class="small text-muted">
+                                -
+                                @if ($cidade)
+                                    — {{ $cidade->nome_cidade }}
+                                @endif
+                            </div>
+
+                            <div class="fw-semibold text-success mt-2">
+                                R$ {{ number_format($compra->total, 2, ',', '.') }}
+                            </div>
+
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
         </div>
+
 
 
         {{-- ================= DESKTOP (TABELA) ================= --}}
@@ -143,7 +224,14 @@
                                     </td>
 
                                     <td class="small text-muted">
-                                        {{ $compra->quantidade }} {{ $compra->unidade }}
+                                  
+
+                                        @if (in_array($compra->unidade, $unidadesEspeciais) && $temDecimal)
+                                            {{ number_format($compra->quantidade, 1, '.', '') }}
+                                            {{ $compra->unidade }}
+                                        @else
+                                            {{ (int) $compra->quantidade }} {{ $compra->unidade }}
+                                        @endif
                                     </td>
 
                                     <td class="fw-bold text-success">
