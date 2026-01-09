@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Lista de Compras - HomeManager">
 
     <div class="container mt-4">
 
@@ -133,14 +133,14 @@
                 </div>
             @endforelse
 
-            {{-- SEM MERCADO --}}
+            {{-- Itens sem mercado --}}
             @php
                 $comprasSemMercado = $compras->whereNull('mercado_id');
             @endphp
 
             @if ($comprasSemMercado->count())
                 <h5 class="fw-bold text-dark mt-4 mb-2">
-                    Sem mercado
+                    Itens sem mercado
                 </h5>
 
                 @foreach ($comprasSemMercado as $compra)
@@ -224,7 +224,7 @@
                                     </td>
 
                                     <td class="small text-muted">
-                                  
+
 
                                         @if (in_array($compra->unidade, $unidadesEspeciais) && $temDecimal)
                                             {{ number_format($compra->quantidade, 1, '.', '') }}

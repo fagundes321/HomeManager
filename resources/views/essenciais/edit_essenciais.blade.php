@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Editar Essencial - HomeManager">
 
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -34,7 +34,7 @@
                                     <label class="form-label fw-semibold text-dark">
                                         Quantidade
                                     </label>
-                                    
+
                                     <div class="input-group">
                                         <input type="number" step="0.01" min="1"
                                            required class="form-control border-dark" name="quantidade" placeholder="1"

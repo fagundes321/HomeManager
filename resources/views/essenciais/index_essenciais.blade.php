@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Essenciais - HomeManager">
 
     <div class="container mt-4">
 

@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Avaliações - HomeManager">
 
     <div class="container mt-4">
 
@@ -98,7 +98,7 @@
                                 @elseif($produto->maior_preco)
                                     R$ {{ number_format($produto->maior_preco, 2, ',', '.') }}
                                 @else
-                                    
+
                                 @endif
                             </div>
 

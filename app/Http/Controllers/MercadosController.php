@@ -13,7 +13,7 @@ class MercadosController extends Controller{
         $mercado = Mercados::all();
         $mensagemSucesso = session('mensagem.sucesso');
 
-        return view('compras.mercado.index')
+        return view('compras.mercado.index_mercado')
         ->with('mercados', $mercado)
         ->with('mensagemSucesso', $mensagemSucesso);
 

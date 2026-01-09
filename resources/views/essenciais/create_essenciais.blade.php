@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Criar Essencial - HomeManager">
 
     <div class="container mt-5">
         <div class="row justify-content-center">
