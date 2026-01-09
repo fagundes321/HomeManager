@@ -140,4 +140,19 @@ class AvaliacoesController extends Controller
             return back();
         }
     }
+
+
+    public function sugestoes(Request $request)
+    {
+        $termo = $request->get('q');
+
+        if (!$termo || strlen($termo) < 2) {
+            return response()->json([]);
+        }
+
+        return Avaliacoes::where('produto', 'like', "%{$termo}%")
+            ->orderBy('produto')
+            ->limit(8)
+            ->pluck('produto');
+    }
 }

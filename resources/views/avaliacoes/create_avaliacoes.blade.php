@@ -18,13 +18,19 @@
                             <div class="row g-3">
 
                                 {{-- Nome --}}
-                                <div class="col-12 col-md-3">
+                                <div class="col-12 col-md-3 position-relative">
                                     <label for="produto" class="form-label fw-semibold text-dark">
                                         Nome do Produto
                                     </label>
+
                                     <input required autofocus class="form-control border-dark" type="text"
                                         id="produto" name="produto" placeholder="Ex.: Arroz, Feijão..."
-                                        value="{{ old('produto')}}">
+                                        autocomplete="off" value="{{ old('produto') }}">
+
+                                    {{-- Sugestões --}}
+                                    <ul id="sugestoes-produto" class="list-group position-absolute w-100 shadow"
+                                        style="z-index: 1000; display: none;">
+                                    </ul>
                                 </div>
 
                                 {{-- Marca --}}
@@ -103,8 +109,8 @@
                                             R$
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
-                                            id="menor_preco" name="menor_preco" placeholder="0,00" value="{{ old('menor_preco') }}"
-                                            oninput="formatarMoeda(this)">
+                                            id="menor_preco" name="menor_preco" placeholder="0,00"
+                                            value="{{ old('menor_preco') }}" oninput="formatarMoeda(this)">
                                     </div>
 
 
@@ -120,8 +126,8 @@
                                             R$
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
-                                            id="maior_preco" name="maior_preco" placeholder="0,00" value="{{ old('maior_preco') }}"
-                                            oninput="formatarMoeda(this)">
+                                            id="maior_preco" name="maior_preco" placeholder="0,00"
+                                            value="{{ old('maior_preco') }}" oninput="formatarMoeda(this)">
                                     </div>
 
 
@@ -137,7 +143,7 @@
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
 
-                                 <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
                                     Salvar
                                 </button>
                                 <a href="{{ route('avaliacao.index') }}"
@@ -164,5 +170,59 @@
             input.value = value.replace(".", ",");
         }
     </script>
+
+    <script>
+        const inputProduto = document.getElementById('produto');
+        const listaSugestoes = document.getElementById('sugestoes-produto');
+
+        let timeout = null;
+
+        inputProduto.addEventListener('input', () => {
+            clearTimeout(timeout);
+
+            const valor = inputProduto.value.trim();
+
+            if (valor.length < 2) {
+                listaSugestoes.style.display = 'none';
+                return;
+            }
+
+            timeout = setTimeout(() => {
+                fetch(`{{ route('avaliacao.sugestoes') }}?q=${valor}`)
+                    .then(res => res.json())
+                    .then(dados => {
+                        listaSugestoes.innerHTML = '';
+
+                        if (dados.length === 0) {
+                            listaSugestoes.style.display = 'none';
+                            return;
+                        }
+
+                        dados.forEach(produto => {
+                            const li = document.createElement('li');
+                            li.className = 'list-group-item list-group-item-action';
+                            li.textContent = produto;
+
+                            li.onclick = () => {
+                                inputProduto.value = produto;
+                                listaSugestoes.style.display = 'none';
+                            };
+
+                            listaSugestoes.appendChild(li);
+                        });
+
+                        listaSugestoes.style.display = 'block';
+                    });
+            }, 300);
+        });
+
+        // Fecha ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#produto')) {
+                listaSugestoes.style.display = 'none';
+            }
+        });
+    </script>
+
 
 </x-layout>

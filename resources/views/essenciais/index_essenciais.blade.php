@@ -23,8 +23,8 @@
 
 
             {{-- TABELA --}}
-            <div class="card shadow-sm border border-dark mb-4">
-                <div class="card-body p-0">
+            <div class="d-none d-md-block">
+                <div class="card shadow-sm border border-dark mb-4"">
                     <div class="table-responsive">
 
                         <table class="table table-hover align-middle mb-0 text-center">
@@ -47,20 +47,19 @@
                                             {{ $item->nome }}
 
                                             <div class="d-md-none small text-muted">
-                                                   {{ (int) $item->quantidade }}
+                                                {{ (int) $item->quantidade }}
                                             </div>
                                         </td>
                                         <td>
                                             @php
                                                 $unidadesEspeciais = ['kg', 'l'];
-                                                $temDecimal = fmod($item->quantidade, 1) != 0
+                                                $temDecimal = fmod($item->quantidade, 1) != 0;
                                             @endphp
 
                                             @if (in_array($item->unidade, $unidadesEspeciais) && $temDecimal)
-                                                {{  number_format($item->quantidade, 1, '.', '') }} {{$item->unidade}}
+                                                {{ number_format($item->quantidade, 1, '.', '') }} {{ $item->unidade }}
                                             @else
-                                            {{ (int) $item->quantidade }} {{$item->unidade}}
-
+                                                {{ (int) $item->quantidade }} {{ $item->unidade }}
                                             @endif
 
                                         </td>
@@ -90,7 +89,8 @@
                                                 </a>
 
                                                 {{-- Excluir --}}
-                                                <form action="{{ route('essenciais.destroy', $item->id) }}" method="POST"
+                                                <form action="{{ route('essenciais.destroy', $item->id) }}"
+                                                    method="POST"
                                                     onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -120,6 +120,49 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="d-md-none">
+
+                <div class="card shadow-sm border-dark mb-3">
+                    <div class="card-body">
+                        {{-- item --}}
+
+                        <div class="d-flex">
+                            <h6 class="fw-bold">
+                                {{ $item->nome }}
+                            </h6>
+                        </div>
+                        <div>
+                            @if (in_array($item->unidade, $unidadesEspeciais) && $temDecimal)
+                                {{ number_format($item->quantidade, 1, '.', '') }} {{ $item->unidade }}
+                            @else
+                                {{ (int) $item->quantidade }} {{ $item->unidade }}
+                            @endif
+
+                        </div>
+                        {{-- AÇÕES --}}
+                            <div class="d-flex gap-2 mt-3">
+                                <a href="{{ route('essenciais.edit', $item->id) }}"
+                                    class="btn btn-outline-dark btn-sm w-50">
+                                    Editar
+                                </a>
+
+                                <form action="{{ route('essenciais.destroy', $item->id) }}" method="POST"
+                                    class="w-50"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+
 
             {{-- RESUMO DO LOCAL --}}
             <div class="mb-4 text-end text-muted">

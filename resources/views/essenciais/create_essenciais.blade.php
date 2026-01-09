@@ -22,21 +22,14 @@
                                     <label for="nome" class="form-label fw-semibold text-dark">
                                         Nome do Produto
                                     </label>
-                                    <input
-                                        required
-                                        autofocus
-                                        type="text"
-                                        id="nome"
-                                        name="nome"
-                                        class="form-control border-dark"
-                                        placeholder="Ex.: Arroz, Feijão..."
-                                        value="{{ old('nome') }}"
-                                    >
+                                    <input required autofocus type="text" id="nome" name="nome" autocomplete="on"
+                                        class="form-control border-dark" placeholder="Ex.: Arroz, Feijão..."
+                                        value="{{ old('nome') }}">
                                 </div>
 
 
 
-                                 {{-- Quantidade + Unidade --}}
+                                {{-- Quantidade + Unidade --}}
                                 <div class="col-12 col-md-4">
                                     <label class="form-label fw-semibold text-dark">
                                         Quantidade
@@ -44,16 +37,9 @@
 
                                     <div class="row g-2">
                                         <div class="col-7">
-                                            <input
-                                                required
-                                                type="number"
-                                                step="0.01"
-                                                min="0"
-                                                class="form-control border-dark"
-                                                name="quantidade"
-                                                placeholder="Qtd"
-                                                value="{{ old('quantidade') }}"
-                                            >
+                                            <input required type="number" step="0.01" min="0"
+                                                class="form-control border-dark" name="quantidade" placeholder="Qtd"
+                                                value="{{ old('quantidade') }}">
                                         </div>
 
                                         <div class="col-5">
@@ -78,12 +64,7 @@
                                     <label for="local" class="form-label fw-semibold text-dark">
                                         Local
                                     </label>
-                                    <select
-                                        id="local"
-                                        name="local"
-                                        class="form-select border-dark"
-                                        required
-                                    >
+                                    <select id="local" name="local" class="form-select border-dark" required>
                                         <option value="" disabled selected>Selecione o local</option>
                                         <option value="Despensa">Despensa</option>
                                         <option value="Geladeira">Geladeira</option>
@@ -98,19 +79,17 @@
 
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
-                                <a
-                                    href="{{ route('essenciais.index') }}"
-                                    class="btn btn-outline-dark px-4 w-100 w-md-auto"
-                                >
+
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
+
+                                <a href="{{ route('essenciais.index') }}"
+                                    class="btn btn-outline-dark px-4 w-100 w-md-auto">
                                     Voltar
                                 </a>
 
-                                <button
-                                    type="submit"
-                                    class="btn btn-dark px-4 w-100 w-md-auto"
-                                >
-                                    Salvar
-                                </button>
+
                             </div>
 
                         </form>

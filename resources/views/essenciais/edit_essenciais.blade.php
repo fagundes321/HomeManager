@@ -36,9 +36,9 @@
                                     </label>
 
                                     <div class="input-group">
-                                        <input type="number" step="0.01" min="1"
-                                           required class="form-control border-dark" name="quantidade" placeholder="1"
-                                           value="{{old('quantidade',(int) $essenciai->quantidade)}}">
+                                        <input type="number" step="0.01" min="1" required
+                                            class="form-control border-dark" name="quantidade" placeholder="1"
+                                            value="{{ old('quantidade', (int) $essenciai->quantidade) }}">
 
                                         <select class="form-select border-dark" name="unidade"
                                             style="max-width: 160px;">
@@ -109,14 +109,17 @@
 
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
+
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
+
                                 <a href="{{ route('essenciais.index') }}"
                                     class="btn btn-outline-dark px-4 w-100 w-md-auto">
                                     Voltar
                                 </a>
 
-                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
-                                    Salvar
-                                </button>
+
                             </div>
 
                         </form>

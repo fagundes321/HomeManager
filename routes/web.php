@@ -22,6 +22,9 @@ Route::patch('/pereciveis/{pereciveis}/decrement', [PereciveisController::class,
 
 Route::resource('/avaliacao', AvaliacoesController::class)->except(['show']);
 Route::patch('/avaliacao/{avaliacao}/favorite', [AvaliacoesController::class, 'favorite'])->name('avaliacao.favorite');
+Route::get('/avaliacao/sugestoes', [AvaliacoesController::class, 'sugestoes'])
+    ->name('avaliacao.sugestoes');
+
 
 
 Route::resource('/essenciais', EssenciaisController::class)->except(['show']);
