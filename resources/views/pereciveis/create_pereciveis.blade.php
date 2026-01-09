@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Criar Perecível - HomeManager">
 
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -12,7 +12,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{ route('despensa.store') }}" method="POST">
+                        <form action="{{ route('pereciveis.store') }}" method="POST">
                             @csrf
 
                             <div class="row g-3">
@@ -22,16 +22,9 @@
                                     <label for="nome" class="form-label fw-semibold text-dark">
                                         Nome do Produto
                                     </label>
-                                    <input
-                                        required
-                                        autofocus
-                                        type="text"
-                                        id="nome"
-                                        name="nome"
-                                        class="form-control border-dark"
-                                        placeholder="Ex.: Arroz, Feijão..."
-                                        value="{{ old('nome') }}"
-                                    >
+                                    <input required autofocus type="text" id="nome" name="nome"
+                                        class="form-control border-dark" placeholder="Ex.: Arroz, Feijão..."
+                                        value="{{ old('nome') }}">
                                 </div>
 
                                 {{-- Marca --}}
@@ -39,14 +32,8 @@
                                     <label for="marca" class="form-label fw-semibold text-dark">
                                         Marca
                                     </label>
-                                    <input
-                                        type="text"
-                                        id="marca"
-                                        name="marca"
-                                        class="form-control border-dark"
-                                        placeholder="Ex.: Sadia, Perdigão..."
-                                        value="{{ old('marca') }}"
-                                    >
+                                    <input type="text" id="marca" name="marca" class="form-control border-dark"
+                                        placeholder="Ex.: Sadia, Perdigão..." value="{{ old('marca') }}">
                                 </div>
 
                                 {{-- Quantidade --}}
@@ -54,17 +41,9 @@
                                     <label for="quantidade" class="form-label fw-semibold text-dark">
                                         Quantidade
                                     </label>
-                                    <input
-                                        required
-                                        type="number"
-                                        step="0"
-                                        min="0"
-                                        id="quantidade"
-                                        name="quantidade"
-                                        class="form-control border-dark"
-                                        placeholder="Qtd"
-                                        value="{{ old('quantidade') }}"
-                                    >
+                                    <input required type="number" step="0" min="0" id="quantidade"
+                                        name="quantidade" class="form-control border-dark" placeholder="Qtd"
+                                        value="{{ old('quantidade') }}">
                                 </div>
 
                                 {{-- Validade --}}
@@ -72,13 +51,8 @@
                                     <label for="validade" class="form-label fw-semibold text-dark">
                                         Validade
                                     </label>
-                                    <input
-                                        type="date"
-                                        id="validade"
-                                        name="validade"
-                                        class="form-control border-dark"
-                                        value="{{ old('validade') }}"
-                                    >
+                                    <input type="date" id="validade" name="validade"
+                                        class="form-control border-dark" value="{{ old('validade') }}">
                                 </div>
 
                                 {{-- Local --}}
@@ -86,12 +60,7 @@
                                     <label for="local" class="form-label fw-semibold text-dark">
                                         Local
                                     </label>
-                                    <select
-                                        id="local"
-                                        name="local"
-                                        class="form-select border-dark"
-                                        required
-                                    >
+                                    <select id="local" name="local" class="form-select border-dark" required>
                                         <option value="" disabled selected>Selecione o local</option>
                                         <option value="Despensa">Despensa</option>
                                         <option value="Geladeira">Geladeira</option>
@@ -106,19 +75,16 @@
 
                             {{-- Botões --}}
                             <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
-                                <a
-                                    href="{{ route('despensa.index') }}"
-                                    class="btn btn-outline-dark px-4 w-100 w-md-auto"
-                                >
+
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
+                                <a href="{{ route('pereciveis.index') }}"
+                                    class="btn btn-outline-dark px-4 w-100 w-md-auto">
                                     Voltar
                                 </a>
 
-                                <button
-                                    type="submit"
-                                    class="btn btn-dark px-4 w-100 w-md-auto"
-                                >
-                                    Salvar
-                                </button>
+
                             </div>
 
                         </form>

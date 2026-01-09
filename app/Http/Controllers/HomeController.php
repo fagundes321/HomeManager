@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Avaliacoes;
 use Illuminate\Http\Request;
 use App\Models\Compras;
-use App\Models\Despensa;
+use App\Models\Pereciveis;
 use App\Models\Essenciais;
 use Carbon\Carbon;
 
@@ -15,12 +15,12 @@ class HomeController extends Controller
      public function index(){
 
         $totalItens = Compras::count();
-        $totalDepensa = Despensa::count();
+        $totalDepensa = Pereciveis::count();
         $totalAvaliacoes = Avaliacoes::count();
         $totalEssenciais = Essenciais::count();
         $agora = Carbon::now()->locale('pt_BR');
 
-     $validadeDespensa = Despensa::whereNotNull('validade')
+     $validadePereciveis = Pereciveis::whereNotNull('validade')
     ->orderBy('validade', 'asc')
     ->first();
 
@@ -28,9 +28,9 @@ class HomeController extends Controller
 
         return view('home.index_home')
         ->with('totalItens' , $totalItens)
-        ->with('totalDespensa', $totalDepensa)
+        ->with('totalPereciveis', $totalDepensa)
         ->with('totalAvaliacoes', $totalAvaliacoes)
-        ->with('validadeDespensa', $validadeDespensa)
+        ->with('validadePereciveis', $validadePereciveis)
         ->with('totalEssenciais', $totalEssenciais)
         ->with('agora', $agora);
     }

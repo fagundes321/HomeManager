@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Inicio - HomeManager">
 
     <div class="container mt-4 mb-5">
 
@@ -129,9 +129,9 @@
                 </a>
             </div>
 
-            {{-- DESPENSA --}}
+            {{-- Pereciveis --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="{{ route('despensa.index') }}" class="text-decoration-none">
+                <a href="{{ route('pereciveis.index') }}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -141,7 +141,7 @@
 
                             </svg>
 
-                            <h2 class="fw-bold mb-0 text-dark">Despensa</h2>
+                            <h2 class="fw-bold mb-0 text-dark">Perecíveis</h2>
                         </div>
 
                         <hr>
@@ -153,7 +153,7 @@
 
                             <p class="fw-bold h1 text-dark text-center ">
 
-                                {{ $totalDespensa }}
+                                {{ $totalPereciveis }}
                             </p>
                             <div class="text-center d-flex justify-content-center align-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -168,7 +168,7 @@
 
                                 <p class="mb-0">
                                     Próximo vencimento:
-                                    {{ $validadeDespensa?->validade?->format('d/m/Y') ?? 'Sem validade' }}
+                                    {{ $validadePereciveis?->validade?->format('d/m/Y') ?? 'Sem validade' }}
 
                                 </p>
                             </div>
@@ -185,7 +185,7 @@
                                 </svg>
                                 <h5 class="fw-bold mb-0 ">
 
-                                    Ver Despensa
+                                    Ver Perecíveis
                                 </h5>
                             </div>
 

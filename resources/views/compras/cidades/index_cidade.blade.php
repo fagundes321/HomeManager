@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Cidades - HomeManager">
     <div class="container mt-4">
         {{-- CABEÇALHO --}}
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">

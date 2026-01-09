@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Lista de Mercados - HomeManager">
 
     <div class="container mt-4">
 

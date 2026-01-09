@@ -1,4 +1,4 @@
-<x-layout title="">
+<x-layout title="Editar Compra - HomeManager">
 
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -145,13 +145,16 @@
                             <hr class="my-4 border-dark">
 
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ route('compras.index') }}" class="btn btn-outline-dark px-4">
-                                    Voltar
-                                </a>
 
                                 <button type="submit" class="btn btn-dark px-4">
                                     Salvar Alterações
                                 </button>
+
+                                <a href="{{ route('compras.index') }}" class="btn btn-outline-dark px-4">
+                                    Voltar
+                                </a>
+
+
 
                             </div>
 
