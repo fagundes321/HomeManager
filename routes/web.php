@@ -6,6 +6,7 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\PereciveisController;
 use App\Http\Controllers\EssenciaisController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManutencaoController;
 use App\Http\Controllers\MercadosController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +26,8 @@ Route::patch('/avaliacao/{avaliacao}/favorite', [AvaliacoesController::class, 'f
 Route::get('/avaliacao/sugestoes', [AvaliacoesController::class, 'sugestoes'])
     ->name('avaliacao.sugestoes');
 
-
-
 Route::resource('/essenciais', EssenciaisController::class)->except(['show']);
+
+Route::resource('/manutencao', ManutencaoController::class)->except('show');
 // Route::get('/compras/editar/{compra}', [ComprasController::class, 'edit'])->name('compras.edit');
 // Route::get('/compras/update/{compra}', [ComprasController::class,  'update'])->name('compras.update');
