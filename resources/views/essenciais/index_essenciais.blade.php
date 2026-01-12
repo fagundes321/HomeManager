@@ -5,7 +5,7 @@
         @forelse ($essenciais as $local => $essencial)
             <div class="d-flex bd-highlight">
                 {{-- TÍTULO DO LOCAL --}}
-                <h2 class="fw-bold text-dark  mb-3 p-2 flex-grow-1 bd-highlight">
+                <h2 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
                     {{ $local }}
                 </h2>
                 {{-- BOTÕES --}}

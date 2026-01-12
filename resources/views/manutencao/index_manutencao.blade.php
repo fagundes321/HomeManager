@@ -1,4 +1,4 @@
-<x-layout title="Perecíveis - HomeManager">
+<x-layout title="Casa & Carro - HomeManager">
 
     <div class="container mt-4">
 
@@ -6,7 +6,7 @@
         {{-- HEADER --}}
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="fw-bold text-dark m-0">
-                {{-- {{ $local }} --}} Perecíveis
+                {{-- {{ $local }} --}} Casa & Carro
             </h2>
 
             <div class="d-flex gap-2">
@@ -30,11 +30,11 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th class="d-none d-md-table-cell">Marca</th>
-                                <th class="d-none d-md-table-cell">Local</th>
-                                <th class="d-none d-md-table-cell">Quantidade</th>
-                                <th>Dias para vencer</th>
-                                <th class="d-none d-md-table-cell">Validade</th>
+                                <th class="d-none d-md-table-cell">observacao</th>
+                                <th class="d-none d-md-table-cell">unidade</th>
+                                <th class="d-none d-md-table-cell">preco</th>
+                                <th>loja</th>
+                                <th class="d-none d-md-table-cell">cidade</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -42,16 +42,10 @@
                         <tbody>
                             @forelse ($manutencao as $item)
 
-                                @php
-                                    $diasParaVencer = explode('.', now()->diffInDays($item->validade, false))[0];
-                                @endphp
+
                                 <tr
                                     class="
-                                            @if ($diasParaVencer < 20) table-danger
-                                            @elseif ($diasParaVencer <= 40)
-                                                table-warning
-                                            @elseif ($diasParaVencer <= 60)
-                                                table-info @endif
+
                                         ">
                                     <td>{{ $loop->iteration }}</td>
 
@@ -59,12 +53,12 @@
                                         {{ $item->nome }}
 
                                         <div class="d-md-none small text-muted">
-                                            {{ $item->marca }}
+                                            {{ $item->observacao }}
                                         </div>
                                     </td>
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->marca }}
+                                        {{ $item->observacao }}
                                     </td>
 
                                     <td class="d-none d-md-table-cell">
@@ -72,27 +66,13 @@
                                     </td>
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->quantidade }}
+                                        {{ $item->preco }}
                                     </td>
                                     <td>
-
-                                        @if ($item->validade == '')
-                                            -
-                                        @else
-                                            @if ($diasParaVencer < 0)
-                                                Vencido há {{ abs($diasParaVencer) }} dias
-                                            @else
-                                                {{ $diasParaVencer }}
-                                            @endif
-                                        @endif
-
+                                        {{ $item->loja }}
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        @if ($item->validade == '')
-                                            -
-                                        @else
-                                            {{ $item->validade?->format('d/m/Y') }}
-                                        @endif
+                                        {{$item->cidade}}
                                     </td>
 
                                     <td>

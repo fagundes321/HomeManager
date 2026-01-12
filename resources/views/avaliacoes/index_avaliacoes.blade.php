@@ -6,7 +6,7 @@
             {{-- BOTÕES --}}
             <div class="d-flex bd-highlight ">
 
-                <h4 class="fw-bold text-dark  mb-3 p-2 flex-grow-1 bd-highlight">
+                <h4 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
                     {{ $categoria }}
                 </h4>
                 <div class=" flex-row p-2 bd-highlight">
@@ -29,7 +29,7 @@
 
                             {{-- PRODUTO --}}
                             <div class="d-flex bd-highlight">
-                                <h6 class="fw-bold  flex-grow-1 bd-highligh">
+                                <h6 class="fw-bold  grow bd-highligh">
                                     {{ $produto->produto }}
                                 </h6>
                                 <div class="d-flex justify-content-between align-items-start  bd-highlight">
