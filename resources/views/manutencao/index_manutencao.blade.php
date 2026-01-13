@@ -14,6 +14,10 @@
                     <i class="bi bi-arrow-left"></i> Menu
                 </a>
 
+                 <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark btn-sm">
+                    <i class="bi bi-arrow-left"></i> Cidades
+                </a>
+
                 <a href="{{ route('manutencao.create') }}" class="btn btn-dark btn-sm">
                     + Novo Item
                 </a>
@@ -29,11 +33,11 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Nome</th>
-                                <th class="d-none d-md-table-cell">observacao</th>
+                                <th class="text-start">Nome</th>
+                                {{-- <th class="d-none d-md-table-cell">observacao</th> --}}
                                 <th class="d-none d-md-table-cell">unidade</th>
-                                <th class="d-none d-md-table-cell">preco</th>
                                 <th>loja</th>
+                                <th class="d-none d-md-table-cell">preco</th>
                                 <th class="d-none d-md-table-cell">cidade</th>
                                 <th>Ações</th>
                             </tr>
@@ -41,62 +45,47 @@
 
                         <tbody>
                             @forelse ($manutencao as $item)
-
-
-                                <tr
-                                    class="
+                                <tr class="
 
                                         ">
                                     <td>{{ $loop->iteration }}</td>
 
-                                    <td class="fw-semibold ">
-                                        {{ $item->nome }}
+                                    <td>
+                                        <div class="fw-semibold text-dark lh-sm text-start">
 
-                                        <div class="d-md-none small text-muted">
-                                            {{ $item->observacao }}
+                                            {{ $item->nome }}
                                         </div>
+
+                                        @if ($item->observacao)
+                                            <div class="small text-muted mt-1 lh-sm text-start" style="max-width: 520px;">
+
+                                                {{ $item->observacao }}
+                                            </div>
+                                        @endif
                                     </td>
 
-                                    <td class="d-none d-md-table-cell">
+                                    {{-- <td class="d-none d-md-table-cell">
                                         {{ $item->observacao }}
-                                    </td>
+                                    </td> --}}
 
                                     <td class="d-none d-md-table-cell">
                                         {{ $item->local }}
-                                    </td>
-
-                                    <td class="d-none d-md-table-cell">
-                                        {{ $item->preco }}
                                     </td>
                                     <td>
                                         {{ $item->loja }}
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        {{$item->cidade}}
+                                        {{ $item->preco }}
+                                    </td>
+
+                                    <td class="d-none d-md-table-cell">
+                                        {{ $item->cidade_id }}
                                     </td>
 
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
 
 
-                                            <form action="{{ route('manutencao.decrement', $item) }}" method="POST"
-                                                class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
-                                                title="Editar" style="width: 36px; height: 36px;"
-                                                @if ($item->quantidade > 1) onsubmit="return confirm('Deseja excluir 1 Produto?')"
-                                                    @else
-                                                        onsubmit="return confirm('Deseja excluir Produto definitivamente?')" @endif>
-                                                @csrf
-                                                @method('PATCH')
-                                                <button type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                        height="16" fill="currentColor" class="bi bi-pencil-square">
-                                                        <path
-                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path
-                                                            d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
-                                                    </svg>
-                                                </button>
-                                            </form>
 
                                             {{-- Editar --}}
                                             <a href="{{ route('manutencao.edit', $item->id) }}"
@@ -133,13 +122,12 @@
 
                                         </div>
                                     </td>
-                                    @empty
+                                @empty
 
-                                        <td colspan="8" class="text-center text-muted py-5">
-                                            Nenhum item cadastrado.
-                                        </td>
+                                    <td colspan="8" class="text-center text-muted py-5">
+                                        Nenhum item cadastrado.
+                                    </td>
                                 </tr>
-
                             @endforelse
                         </tbody>
 
@@ -155,15 +143,13 @@
         <div class="d-md-none">
 
             @foreach ($manutencao as $item)
-                @php
-                    $diasParaVencer = explode('.', now()->diffInDays($item->validade, false))[0];
-                @endphp
+
+
 
                 <div
                     class="card shadow-sm mb-3
-                        @if ($diasParaVencer < 0) border-danger
-                        @elseif ($diasParaVencer <= 20) border-warning
-                        @else border-dark @endif
+
+                        border-dark
                     ">
                     <div class="card-body">
 
@@ -171,9 +157,9 @@
                             {{ $item->nome }}
                         </h6>
 
-                        @if ($item->marca)
+                        @if ($item->observacao)
                             <div class="small text-muted mb-1">
-                                {{ $item->marca }}
+                                {{ $item->observacao }}
                             </div>
                         @endif
 
@@ -198,15 +184,6 @@
                         </div>
 
                         <div class="d-flex gap-2 mt-3">
-
-                            <form action="{{ route('manutencao.decrement', $item) }}" method="POST" class="flex-fill"
-                                onsubmit="return confirm('Remover 1 unidade?')">
-                                @csrf
-                                @method('PATCH')
-                                <button class="btn btn-outline-dark btn-sm w-100">
-                                    Consumir 1
-                                </button>
-                            </form>
 
                             <a href="{{ route('manutencao.edit', $item) }}"
                                 class="btn btn-outline-dark btn-sm flex-fill">

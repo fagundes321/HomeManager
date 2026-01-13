@@ -18,6 +18,7 @@ Route::resource('/', HomeController::class)->except(['show']);
 Route::resource('/compras', ComprasController::class)->except(['show']);
 Route::resource('/mercado', MercadosController::class)->except(['show']);
 Route::resource('/cidades', CidadesController::class)->except(['show']);
+
 Route::resource('/pereciveis', PereciveisController::class)->except(['show']);
 Route::patch('/pereciveis/{pereciveis}/decrement', [PereciveisController::class, 'decrement'])->name('pereciveis.decrement');
 

@@ -9,7 +9,7 @@
                     + Nova Cidade
                 </a>
 
-                <a href="{{ route('compras.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">
                     Voltar
                 </a>
             </div>
