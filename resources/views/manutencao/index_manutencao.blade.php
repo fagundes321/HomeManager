@@ -69,17 +69,18 @@
                                     </td> --}}
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->local }}
+                                        {{ $item->unidade }}
                                     </td>
                                     <td>
                                         {{ $item->loja }}
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->preco }}
+                                       R$ {{ $item->preco }}
                                     </td>
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->cidade_id }}
+
+                                        {{ $cidades->firstWhere('cidade', $item->cidade)->nome_cidade ?? '-' }}
                                     </td>
 
                                     <td>
