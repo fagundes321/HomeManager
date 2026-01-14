@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cidades;
 use App\Models\Manutencao;
+use App\Models\Mercados;
 use Illuminate\Http\Request;
 
 class ManutencaoController extends Controller
@@ -13,7 +14,16 @@ class ManutencaoController extends Controller
     public function index()
     {
         $cidades = Cidades::all();
-        $manutencao = Manutencao::all();
+        $manutencao = Manutencao::orderByRaw("
+            CASE
+                WHEN local = 'Casa' THEN 1
+                WHEN local = 'Carro' THEN 2
+                ELSE 5
+            END")
+            ->orderBy('nome')
+            ->get()
+            ->groupBy('local')
+            ;
 
         return view('manutencao.index_manutencao')
             ->with('manutencao', $manutencao)
@@ -25,7 +35,7 @@ class ManutencaoController extends Controller
 
         $cidades = Cidades::all();
 
-        return view('manutencao.create_manutencao', )
+        return view('manutencao.create_manutencao',)
             ->with('cidades', $cidades);
     }
 
@@ -43,10 +53,37 @@ class ManutencaoController extends Controller
         return to_route('manutencao.index');
     }
 
-    public function edit() {}
+    public function edit(Manutencao $manutencao)
+    {
+
+        $cidades = Cidades::all();
+        // $manutencao = Manutencao::all();
+
+        return view('manutencao.edit_manutencao')
+            ->with('cidades', $cidades)
+            ->with('manutencao', $manutencao);
+    }
 
 
-    public function update() {}
+    public function update(Manutencao $manutencao, Request $request)
+    {
+        $request->merge([
+            'preco' => $request->filled('preco')
+                ? str_replace(',', '.', $request->preco)
+                : null
+        ]);
 
-    public function destroy() {}
+        $manutencao->fill($request->all());
+        $manutencao->save();
+
+        return to_route('manutencao.index');
+    }
+
+    public function destroy(Manutencao $manutencao)
+    {
+
+        $manutencao->delete();
+
+        return back();
+    }
 }
