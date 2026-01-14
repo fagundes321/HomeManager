@@ -12,7 +12,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{ route('manutencao.store') }}" method="POST">
+                        <form action="{{ route('manutencao.store', $manutencao->id) }}" method="POST">
                             @csrf
 
                             <div class="row g-3">
@@ -25,7 +25,7 @@
 
                                     <input required autofocus class="form-control border-dark" type="text"
                                         id="nome" name="nome" placeholder="Ex.: Espelho, Pneu..."
-                                        autocomplete="off" value="{{ old('nome') }}">
+                                        autocomplete="off" value="{{ old('nome', $manutencao->nome) }}">
 
 
                                 </div>
@@ -36,7 +36,8 @@
                                         Unidade
                                     </label>
                                     <input class="form-control border-dark" type="text" id="unidade" name="unidade"
-                                        placeholder="Ex.: 1 km, 1 kg..." value="{{ old('unidade') }}">
+                                        placeholder="Ex.: 1 km, 1 kg..."
+                                        value="{{ old('unidade', $manutencao->unidade) }}">
                                 </div>
 
 
@@ -50,7 +51,8 @@
                                             R$
                                         </span>
                                         <input class="form-control border-dark" type="text" inputmode="decimal"
-                                            id="preco" name="preco" placeholder="0,00" value="{{ old('preco') }}"
+                                            id="preco" name="preco" placeholder="0,00"
+                                            value="{{ old('preco', $manutencao->preco) }}"
                                             oninput="formatarMoeda(this)">
                                     </div>
 
@@ -64,7 +66,8 @@
                                         Loja
                                     </label>
                                     <input class="form-control border-dark" type="text" id="loja" name="loja"
-                                        placeholder="Ex.: Real, Americanas..." value="{{ old('loja') }}">
+                                        placeholder="Ex.: Real, Americanas..."
+                                        value="{{ old('loja', $manutencao->loja) }}">
                                 </div>
                                 {{-- Cidade --}}
                                 <div class="col-12 col-md-3">
@@ -72,15 +75,15 @@
                                         Cidade
                                     </label>
                                     <select class="form-select border-dark" name="cidade_id">
-                                        <option value="" disabled selected>
-                                            Selecione
-                                        </option>
+                                        <option value="" disabled>Selecione</option>
+
                                         @foreach ($cidades as $cidade)
-                                            <option value="{{ $cidade->id }}">
+                                            <option value="{{ $cidade->id }}" @selected(old('cidade_id', $manutencao->cidade_id) == $cidade->id)>
                                                 {{ $cidade->nome_cidade }}
                                             </option>
                                         @endforeach
                                     </select>
+
                                 </div>
 
 
@@ -96,10 +99,18 @@
                                         <div class="">
                                             <select class="form-select border-dark" name="local" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="Casa">Casa</option>
-                                                <option value="Carro">Carro</option>
+                                                <option value="Casa" @selected(old('Casa', $manutencao->local) == 'Casa')>
+                                                    Casa
+                                                </option>
+                                                <option value="Carro" @selected(old('Carro', $manutencao->local) == 'Carro')>
+                                                    Carro
+                                                </option>
+
 
                                             </select>
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -111,9 +122,17 @@
                                     </label>
 
                                     <textarea class="form-control border-dark" id="observacao" name="observacao" rows="4"
-                                        placeholder="Escreva sua opinião sobre o produto...">{{ old('observacao') }}</textarea>
+                                        placeholder="Escreva sua opinião sobre o produto...">{{ old('observacao', $manutencao->observacao) }}</textarea>
                                 </div>
+
+
+
+
                             </div>
+
+
+
+
                     </div>
 
                     <hr class="my-4 border-dark">
