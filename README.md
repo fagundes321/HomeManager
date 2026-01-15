@@ -2,6 +2,10 @@
 
 O **HomeManager** é um sistema pessoal para organização da casa, criado para centralizar informações do dia a dia como compras, itens essenciais, perecíveis, avaliações de produtos e manutenções domésticas ou automotivas.
 
+**Acredito que, antes de administrar qualquer coisa, seja no âmbito pessoal ou empresarial, o primeiro passo é saber administrar a própria casa.**  
+
+Este projeto nasceu dessa necessidade.
+
 O objetivo é facilitar o controle, evitar desperdícios, planejar gastos e manter tudo organizado em um único lugar.
 
 ---
@@ -25,7 +29,7 @@ O objetivo é facilitar o controle, evitar desperdícios, planejar gastos e mant
 > Funcionalidade planejada
 
 Atualmente, o controle financeiro ainda não foi implementado no sistema, pois utilizo uma planilha pessoal para essa finalidade.  
-Essa funcionalidade está nos planos futuros do projeto.
+Essa funcionalidade faz parte dos planos futuros do projeto.
 
 ---
 
