@@ -1,59 +1,112 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏠 HomeManager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+O **HomeManager** é um sistema pessoal para organização da casa, criado para centralizar informações do dia a dia como compras, itens essenciais, perecíveis, avaliações de produtos e manutenções domésticas ou automotivas.
 
-## About Laravel
+O objetivo é facilitar o controle, evitar desperdícios, planejar gastos e manter tudo organizado em um único lugar.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Funcionalidades
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🛒 Lista de Compras
+- Cadastro de itens com:
+  - Nome
+  - Marca
+  - Quantidade
+  - Preço
+  - Mercado
+  - Cidade
+  - Total das compras
+- Visualização responsiva (desktop e mobile)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 💰 Financeiro
+> Funcionalidade planejada
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Atualmente, o controle financeiro ainda não foi implementado no sistema, pois utilizo uma planilha pessoal para essa finalidade.  
+Essa funcionalidade está nos planos futuros do projeto.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 📦 Despensa / Perecíveis
+- Cadastro de itens com:
+  - Nome
+  - Marca
+  - Quantidade
+  - Validade
+- Destaque visual para itens próximos do vencimento
+- Controle de consumo (decrementar quantidade)
+- Visualização responsiva (desktop e mobile)
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### ⭐ Avaliações de Produtos
+- Cadastro de avaliações de produtos já comprados
+- Campos de:
+  - Nome do produto
+  - Marca
+  - Categoria
+  - Avaliação (Excelente, Bom, Ruim)
+  - Comentário
+  - Preço mínimo e máximo já encontrados
+- Base para histórico e futuras sugestões de compra
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 📋 Essenciais
+- Lista de itens essenciais para a casa
+- Ideal para controle mensal (ex: arroz, papel higiênico, detergente)
+- Organização por local
+- Quantidade com suporte a unidades especiais (kg, l)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🛠️ Manutenções (Casa & Carro)
+- Controle de manutenções e objetivos recorrentes
+- Campos como:
+  - Nome
+  - Local
+  - Observação
+  - Preço
+  - Loja
+- Ideal para:
+  - Troca de óleo
+  - Revisões
+  - Reparos domésticos
+  - Compras planejadas
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧱 Tecnologias Utilizadas
 
-## License
+- **Laravel**
+- **Blade**
+- **Bootstrap**
+- **MySQL**
+- **PHP**
+- **Git**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 📱 Interface
+
+- Layout totalmente responsivo
+- Experiência otimizada para:
+  - Desktop
+  - Tablet
+  - Celular
+- Uso de ícones, cores e destaques visuais para facilitar o entendimento e o controle
+
+---
+
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido como uma solução pessoal de organização doméstica e também como forma de estudo prático com **Laravel**, servindo como base para evolução contínua e aplicação de boas práticas de desenvolvimento.
+
+---
+
+## 👨‍💻 Autor
+
+**Victor Fagundes**  
+Projeto pessoal focado em organização, aprendizado e evolução contínua 🚀
