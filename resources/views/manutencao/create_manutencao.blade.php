@@ -103,7 +103,13 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-2 col-md-6">
+                                    <label class="form-label fw-semibold text-dark">
+                                        Link
+                                    </label>
+                                    <input class="form-control border-dark" type="text" id="link" name="link"
+                                        placeholder="Ex.: http://..." value="{{ old('link') }}">
+                                </div>
                                 {{-- Descrição --}}
                                 <div class="col-12">
                                     <label for="observacao" class="form-label fw-semibold text-dark">
@@ -114,32 +120,33 @@
                                         placeholder="Escreva sua opinião sobre o produto...">{{ old('observacao') }}</textarea>
                                 </div>
                             </div>
+
+
+                            <hr class="my-4 border-dark">
+
+                            {{-- Botões --}}
+
+                            <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
+
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
+                                <a href="{{ route('manutencao.index') }}"
+                                    class="btn btn-outline-dark px-4 w-100 w-md-auto">
+                                    Voltar
+                                </a>
+
+
+                            </div>
+
+
+                        </form>
+
                     </div>
-
-                    <hr class="my-4 border-dark">
-
-                    {{-- Botões --}}
-
-                    <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
-
-                        <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
-                            Salvar
-                        </button>
-                        <a href="{{ route('manutencao.index') }}" class="btn btn-outline-dark px-4 w-100 w-md-auto">
-                            Voltar
-                        </a>
-
-
-                    </div>
-
-
-                    </form>
-
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 
     <script>

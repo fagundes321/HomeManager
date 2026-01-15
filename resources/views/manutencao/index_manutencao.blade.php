@@ -46,7 +46,24 @@
                                         <td>{{ $loop->iteration }}</td>
 
                                         <td class="text-start">
-                                            <strong>{{ $item->nome }}</strong>
+                                            <strong class="d-flex">
+                                                {{ $item->nome }}
+                                                @if ($item->link)
+                                                    <a href="{{ $item->link }}" target="_blank">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-link-45deg ml-2 "
+                                                            style="width: 25px; height: 25px;" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                                            <path
+                                                                d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                                        </svg>
+                                                    </a>
+                                                @else
+                                                @endif
+
+                                            </strong>
                                             @if ($item->observacao)
                                                 <div class="small text-muted">
                                                     {{ $item->observacao }}
@@ -124,27 +141,61 @@
                 @foreach ($itens as $item)
                     <div class="card shadow-sm mb-3 border-dark">
                         <div class="card-body">
-
-                            <h6 class="fw-bold">{{ $item->nome }}</h6>
-
+                            <div class="d-flex bd-highlight">
+                                <h6 class="fw-bold grow bd-highligh">{{ $item->nome }}</h6>
+                                @if ($item->link)
+                                    <a href="{{ $item->link }}" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            fill="currentColor" class="bi bi-link-45deg ml-2 "
+                                            style="width: 25px; height: 25px;" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                            <path
+                                                d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                        </svg>
+                                    </a>
+                                @else
+                                @endif
+                            </div>
                             @if ($item->observacao)
                                 <div class="small text-muted mb-2">
                                     {{ $item->observacao }}
                                 </div>
                             @endif
+                            @if ($item->unidade)
+                                <div class="small">
+                                    <strong>
+                                        Unidade:
+                                    </strong>
+                                    {{ $item->unidade}}
+                                </div>
+                            @endif
 
-                            <div class="small"><strong>Unidade:</strong> {{ $item->unidade ?? '-' }}</div>
-                            <div class="small"><strong>Loja:</strong> {{ $item->loja ?? '-' }}</div>
+                                @if ($item->loja)
+
+                                <div class="small">
+                                    <strong>
+                                        Loja:
+                                    </strong>
+                                    {{ $item->loja}}
+                                </div>
+                                @endif
+                            @if ($item->preco)
+
                             <div class="small">
                                 <strong>Preço:</strong>
-                                {{ $item->preco ? 'R$ ' . number_format($item->preco, 2, ',', '.') : '-' }}
+                                {{  'R$ ' . number_format($item->preco, 2, ',', '.')  }}
                             </div>
+                            @endif
+                            @if ($item->cidade)
                             <div class="small mb-3">
                                 <strong>Cidade:</strong>
-                                {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade ?? '-' }}
+                                {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade}}
                             </div>
 
-                            <div class="d-flex gap-2">
+                            @endif
+
+                            <div class="d-flex gap-2 mt-2">
                                 <a href="{{ route('manutencao.edit', $item->id) }}"
                                     class="btn btn-outline-dark btn-sm flex-fill">
                                     Editar
@@ -165,77 +216,77 @@
                 @endforeach
             </div>
 
-@empty
-    {{-- HEADER --}}
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="fw-bold text-dark m-0">
-            Manutenções
-        </h2>
+        @empty
+            {{-- HEADER --}}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="fw-bold text-dark m-0">
+                    Manutenções
+                </h2>
 
-        <div class="d-flex gap-2">
-            <a href="{{ route('index') }}" class="btn btn-outline-dark btn-sm">
-                Menu
-            </a>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('index') }}" class="btn btn-outline-dark btn-sm">
+                        Menu
+                    </a>
 
-            <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark btn-sm">
-                Cidades
-            </a>
+                    <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark btn-sm">
+                        Cidades
+                    </a>
 
-            <a href="{{ route('manutencao.create') }}" class="btn btn-dark btn-sm">
-                + Novo Item
-            </a>
-        </div>
-    </div>
-
-    {{-- ================= DESKTOP ================= --}}
-    <div class="d-none d-md-block">
-        <div class="card shadow-sm border border-dark">
-            <div class="table-responsive">
-                <table class="table mb-0 text-center align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>#</th>
-                            <th class="text-start">Nome</th>
-                            <th class="d-none d-md-table-cell">Unidade</th>
-                            <th>Loja</th>
-                            <th class="d-none d-md-table-cell">Preço</th>
-                            <th class="d-none d-md-table-cell">Cidade</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td colspan="7" class="py-5 text-muted fw-semibold">
-                                Nenhuma manutenção cadastrada.<br>
-                                Clique em <strong>“+ Novo Item”</strong> para começar.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <a href="{{ route('manutencao.create') }}" class="btn btn-dark btn-sm">
+                        + Novo Item
+                    </a>
+                </div>
             </div>
-        </div>
-    </div>
 
-    {{-- ================= MOBILE ================= --}}
-    <div class="d-md-none">
-        <div class="card shadow-sm border-dark text-center">
-            <div class="card-body py-5">
-                <h6 class="fw-bold mb-2">
-                    Nenhuma manutenção cadastrada
-                </h6>
+            {{-- ================= DESKTOP ================= --}}
+            <div class="d-none d-md-block">
+                <div class="card shadow-sm border border-dark">
+                    <div class="table-responsive">
+                        <table class="table mb-0 text-center align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th class="text-start">Nome</th>
+                                    <th class="d-none d-md-table-cell">Unidade</th>
+                                    <th>Loja</th>
+                                    <th class="d-none d-md-table-cell">Preço</th>
+                                    <th class="d-none d-md-table-cell">Cidade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
 
-                <p class="text-muted mb-4">
-                    Você ainda não adicionou nenhum item.
-                </p>
-
-                <a href="{{ route('manutencao.create') }}" class="btn btn-dark btn-sm">
-                    + Novo Item
-                </a>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7" class="py-5 text-muted fw-semibold">
+                                        Nenhuma manutenção cadastrada.<br>
+                                        Clique em <strong>“+ Novo Item”</strong> para começar.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-@endforelse
+
+            {{-- ================= MOBILE ================= --}}
+            <div class="d-md-none">
+                <div class="card shadow-sm border-dark text-center">
+                    <div class="card-body py-5">
+                        <h6 class="fw-bold mb-2">
+                            Nenhuma manutenção cadastrada
+                        </h6>
+
+                        <p class="text-muted mb-4">
+                            Você ainda não adicionou nenhum item.
+                        </p>
+
+                        <a href="{{ route('manutencao.create') }}" class="btn btn-dark btn-sm">
+                            + Novo Item
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endforelse
 
 
 

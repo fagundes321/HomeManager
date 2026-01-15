@@ -15,6 +15,7 @@ class Manutencao extends Model
         'observacao',
         'preco',
         'loja',
+        'link',
         'cidade_id'
     ];
 }

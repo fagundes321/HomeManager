@@ -1,4 +1,4 @@
-<x-layout title="Criar Manutenção - HomeManager">
+<x-layout title="Editar Manutenção - HomeManager">
 
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -7,14 +7,14 @@
                 <div class="card shadow-sm border border-dark">
                     {{-- Header --}}
                     <div class="card-header bg-dark text-white fw-semibold">
-                        Nova Manutenção
+                        Editar Manutenção
                     </div>
 
                     <div class="card-body">
 
-                        <form action="{{ route('manutencao.store', $manutencao->id) }}" method="POST">
+                        <form action="{{ route('manutencao.update', $manutencao->id) }}" method="POST">
                             @csrf
-
+                            @method('PUT')
                             <div class="row g-3">
 
                                 {{-- Nome --}}
@@ -76,26 +76,19 @@
                                     </label>
                                     <select class="form-select border-dark" name="cidade_id">
                                         <option value="" disabled>Selecione</option>
-
                                         @foreach ($cidades as $cidade)
                                             <option value="{{ $cidade->id }}" @selected(old('cidade_id', $manutencao->cidade_id) == $cidade->id)>
                                                 {{ $cidade->nome_cidade }}
                                             </option>
                                         @endforeach
                                     </select>
-
                                 </div>
-
-
-
                                 {{-- Avaliação --}}
                                 <div class=" col-md-3">
                                     <label class="form-label fw-semibold text-dark">
                                         Local
                                     </label>
-
                                     <div class="">
-
                                         <div class="">
                                             <select class="form-select border-dark" name="local" required>
                                                 <option value="" disabled selected>Selecione</option>
@@ -105,18 +98,25 @@
                                                 <option value="Carro" @selected(old('Carro', $manutencao->local) == 'Carro')>
                                                     Carro
                                                 </option>
-
-
                                             </select>
-
-
-
                                         </div>
                                     </div>
+
                                 </div>
+
+                                <div class="col-2 col-md-6">
+                                    <label class="form-label fw-semibold text-dark">
+                                        Link
+                                    </label>
+                                       <input class="form-control border-dark" type="text" id="link" name="link"
+                                        placeholder="Ex.: http://..."
+                                        value="{{ old('link', $manutencao->link) }}">
+                                </div>
+
 
                                 {{-- Descrição --}}
                                 <div class="col-12">
+
                                     <label for="observacao" class="form-label fw-semibold text-dark">
                                         Observação
                                     </label>
@@ -124,41 +124,24 @@
                                     <textarea class="form-control border-dark" id="observacao" name="observacao" rows="4"
                                         placeholder="Escreva sua opinião sobre o produto...">{{ old('observacao', $manutencao->observacao) }}</textarea>
                                 </div>
-
-
-
-
                             </div>
+                            <hr class="my-4 border-dark">
+                            {{-- Botões --}}
+                            <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
 
-
-
-
+                                <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
+                                    Salvar
+                                </button>
+                                <a href="{{ route('manutencao.index') }}"
+                                    class="btn btn-outline-dark px-4 w-100 w-md-auto">
+                                    Voltar
+                                </a>
+                            </div>
+                        </form>
                     </div>
-
-                    <hr class="my-4 border-dark">
-
-                    {{-- Botões --}}
-
-                    <div class="d-flex flex-column flex-md-row justify-content-end gap-2">
-
-                        <button type="submit" class="btn btn-dark px-4 w-100 w-md-auto">
-                            Salvar
-                        </button>
-                        <a href="{{ route('manutencao.index') }}" class="btn btn-outline-dark px-4 w-100 w-md-auto">
-                            Voltar
-                        </a>
-
-
-                    </div>
-
-
-                    </form>
-
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 
     <script>
