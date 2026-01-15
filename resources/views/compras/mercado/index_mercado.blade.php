@@ -13,7 +13,7 @@
                     + Adicionar Mercado
                 </a>
 
-                <a href="{{ route('compras.index') }}" class="btn btn-outline-dark">
+                <a href="{{ url()->previous() }}" class="btn btn-outline-dark">
                     Voltar
                 </a>
             </div>

@@ -5,10 +5,42 @@
         {{-- HEADER --}}
 
         <div class="text-center mb-4">
-            <span class="badge bg-dark fs-6 px-3 py-2">
-                {{ $agora->translatedFormat('d/m/Y') }} •
-                <span id="clock">{{ $agora->format('H:i') }}</span>
-            </span>
+          <div class="d-flex flex-column flex-md-row align-items-center mb-3 gap-2">
+
+    {{-- Espaço à esquerda (só no desktop) --}}
+    <div class="d-none d-md-block flex-grow-3"></div>
+
+    {{-- Relógio central --}}
+    <div class="text-center">
+        <span class="badge bg-dark fs-6 px-3 py-2">
+            {{ $agora->translatedFormat('d/m/Y') }} •
+            <span id="clock">{{ $agora->format('H:i') }}</span>
+        </span>
+    </div>
+
+    {{-- Botões --}}
+    <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2 flex-grow-1 mt-2 mt-md-0">
+
+        <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark">
+            Financeiro
+        </a>
+
+        <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark">
+            Mercados
+        </a>
+
+        <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark">
+            Cidades
+        </a>
+
+        <a href="#" class="btn btn-outline-dark">
+            Locais
+        </a>
+
+    </div>
+
+</div>
+
 
         </div>
         <hr>
@@ -332,7 +364,7 @@
 
             {{-- HISTÓRICO --}}
             <div class="col-12 col-md-6 col-lg-4">
-                <a href="{{route('manutencao.index')}}" class="text-decoration-none">
+                <a href="{{ route('manutencao.index') }}" class="text-decoration-none">
                     <div class="card dashboard-card border border-dark shadow-sm h-100">
                         <div class="text-center d-flex justify-content-center align-items-center p-2 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
