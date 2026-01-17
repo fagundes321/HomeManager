@@ -33,7 +33,7 @@
             Cidades
         </a>
 
-        <a href="#" class="btn btn-outline-dark">
+        <a href="{{ route('locais.index') }}" class="btn btn-outline-dark">
             Locais
         </a>
 
