@@ -30,7 +30,7 @@
                                 id="local"
                                 name="local"
                                 placeholder="Ex.: Cozinha, Banheiro..."
-                                value="{{ $locai ?? '' }}"
+                                value="{{ $nome }}"
                             >
                         </div>
 
@@ -38,7 +38,7 @@
 
                         {{-- AÇÕES --}}
                         <div class="d-flex justify-content-end gap-2">
-                            <a href="{{ route('cidades.index') }}"
+                            <a href="{{ route('locais.index') }}"
                                class="btn btn-outline-dark px-4">
                                 Voltar
                             </a>

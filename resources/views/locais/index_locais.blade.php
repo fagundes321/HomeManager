@@ -1,4 +1,4 @@
-<x-layout title="Cidades - HomeManager">
+<x-layout title="Locais - HomeManager">
     <div class="container mt-4">
         {{-- CABEÇALHO --}}
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2">
@@ -86,7 +86,7 @@
                         @empty
                             <tr>
                                 <td colspan="3" class="text-center text-muted py-4">
-                                    Nenhuma cidade cadastrada.
+                                    Nenhum Local cadastrado.
                                 </td>
                             </tr>
                         @endforelse

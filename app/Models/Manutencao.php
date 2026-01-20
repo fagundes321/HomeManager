@@ -18,4 +18,9 @@ class Manutencao extends Model
         'link',
         'cidade_id'
     ];
+
+    public function local()
+    {
+        return $this->belongsTo(Locais::class, 'local_id');
+    }
 }

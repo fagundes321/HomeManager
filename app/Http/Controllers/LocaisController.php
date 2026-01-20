@@ -10,7 +10,9 @@ class LocaisController extends Controller
 
      public function index(){
 
-        $locais = Locais::all();
+        $locais = Locais::orderBy('local', 'asc')->get();
+
+
 
         return view('locais.index_locais',[
             'locais' => $locais

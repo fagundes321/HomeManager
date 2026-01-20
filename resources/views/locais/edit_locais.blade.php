@@ -1,3 +1,4 @@
+
 {{-- EDIT --}}
 <x-layout title="Novo Local - HomeManager">
     <x-locais.form

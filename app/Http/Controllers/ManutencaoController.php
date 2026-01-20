@@ -6,6 +6,7 @@ use App\Models\Cidades;
 use App\Models\Manutencao;
 use App\Models\Mercados;
 use Illuminate\Http\Request;
+use App\Models\Locais;
 
 class ManutencaoController extends Controller
 {
@@ -13,21 +14,11 @@ class ManutencaoController extends Controller
 
     public function index()
     {
-        $cidades = Cidades::all();
-        $manutencao = Manutencao::orderByRaw("
-            CASE
-                WHEN local = 'Casa' THEN 1
-                WHEN local = 'Carro' THEN 2
-                ELSE 5
-            END")
-            ->orderBy('nome')
-            ->get()
-            ->groupBy('local')
-            ;
+        $manutencao = Manutencao::orderBy('local_id')->get();
+        $locais     = Locais::orderBy('local')->get();
+        $cidades    = Cidades::all();
 
-        return view('manutencao.index_manutencao')
-            ->with('manutencao', $manutencao)
-            ->with('cidades', $cidades);
+        return view('manutencao.index_manutencao', compact('manutencao', 'locais', 'cidades'));
     }
 
     public function create()
