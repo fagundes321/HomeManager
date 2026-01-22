@@ -90,14 +90,14 @@
                                     </label>
                                     <div class="">
                                         <div class="">
-                                            <select class="form-select border-dark" name="local" required>
+                                            <select class="form-select border-dark" name="local_id" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="Casa" @selected(old('Casa', $manutencao->local) == 'Casa')>
-                                                    Casa
-                                                </option>
-                                                <option value="Carro" @selected(old('Carro', $manutencao->local) == 'Carro')>
-                                                    Carro
-                                                </option>
+                                                @foreach ($locais as $local)
+                                                    <option value="{{$local->id}}" @selected(old('local_id', $manutencao->local_id) == $local->id)>
+                                                        {{$local->local}}
+                                                    </option>
+                                                @endforeach
+
                                             </select>
                                         </div>
                                     </div>

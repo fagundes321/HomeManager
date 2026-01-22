@@ -1,5 +1,4 @@
 <x-layout title="Criar Manutenção - HomeManager">
-
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-9 col-xl-8">
@@ -85,7 +84,7 @@
 
 
 
-                                {{-- Avaliação --}}
+                                {{-- Local --}}
                                 <div class=" col-md-3">
                                     <label class="form-label fw-semibold text-dark">
                                         Local
@@ -94,10 +93,14 @@
                                     <div class="">
 
                                         <div class="">
-                                            <select class="form-select border-dark" name="local" required>
+                                            <select class="form-select border-dark" name="local_id" required>
                                                 <option value="" disabled selected>Selecione</option>
-                                                <option value="Casa">Casa</option>
-                                                <option value="Carro">Carro</option>
+
+                                                @foreach ($locais as $local)
+                                                <option value="{{$local->id}}">
+                                                    {{$local->local}}
+                                                </option>
+                                                @endforeach
 
                                             </select>
                                         </div>

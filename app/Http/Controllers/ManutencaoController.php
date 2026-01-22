@@ -14,7 +14,7 @@ class ManutencaoController extends Controller
 
     public function index()
     {
-        $manutencao = Manutencao::orderBy('local_id')->get();
+        $manutencao = Manutencao::all();
         $locais     = Locais::orderBy('local')->get();
         $cidades    = Cidades::all();
 
@@ -25,9 +25,10 @@ class ManutencaoController extends Controller
     {
 
         $cidades = Cidades::all();
+        $locais = Locais::all();
 
-        return view('manutencao.create_manutencao',)
-            ->with('cidades', $cidades);
+
+        return view('manutencao.create_manutencao', compact('cidades', 'locais'));
     }
 
 
@@ -48,11 +49,9 @@ class ManutencaoController extends Controller
     {
 
         $cidades = Cidades::all();
-        // $manutencao = Manutencao::all();
+        $locais = Locais::all();
 
-        return view('manutencao.edit_manutencao')
-            ->with('cidades', $cidades)
-            ->with('manutencao', $manutencao);
+        return view('manutencao.edit_manutencao', compact('manutencao', 'cidades', 'locais'));
     }
 
 
@@ -66,6 +65,7 @@ class ManutencaoController extends Controller
 
         $manutencao->fill($request->all());
         $manutencao->save();
+
 
         return to_route('manutencao.index');
     }

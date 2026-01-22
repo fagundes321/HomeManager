@@ -10,13 +10,13 @@ class Manutencao extends Model
 
     protected $fillable = [
         'nome',
-        'local',
         'unidade',
         'observacao',
         'preco',
         'loja',
         'link',
-        'cidade_id'
+        'cidade_id',
+        'local_id'
     ];
 
     public function local()
