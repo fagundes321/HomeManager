@@ -2,15 +2,19 @@
 
     <div class="container mt-4">
 
-        @forelse ($manutencao as $item)
+        @forelse ($locais as $local)
             @php
-                $lugaresDasManutencoes = $locais->where('')
+                $lugaresDasManutencoes = $manutencao->where('lugar_id', $local->id);
             @endphp
             {{-- HEADER --}}
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="fw-bold text-dark m-0">
-                    {{ $locais->firstWhere('id', $item->local_id)->local ?? '' }}
-                </h2>
+              @if ($lugaresDasManutencoes->count())
+              <h2 class="fw-bold text-dark m-0">
+                  {{ $local->local }}
+              </h2>
+              @endif
+
+              @foreach ($lugaresDasManutencoes as $teste)
 
 
                 <div class="d-flex gap-2">
@@ -49,9 +53,9 @@
 
                                     <td class="text-start">
                                         <strong class="d-flex">
-                                            {{ $item->nome }}
-                                            @if ($item->link)
-                                                <a href="{{ $item->link }}" target="_blank">
+                                            {{ $teste->nome }}
+                                            @if ($teste->link)
+                                                <a href="{{ $teste->link }}" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor"
                                                         class="bi bi-link-45deg ml-2 "
@@ -66,25 +70,25 @@
                                             @endif
 
                                         </strong>
-                                        @if ($item->observacao)
+                                        @if ($teste->observacao)
                                             <div class="small text-muted">
-                                                {{ $item->observacao }}
+                                                {{ $teste->observacao }}
                                             </div>
                                         @endif
                                     </td>
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->unidade ?? '-' }}
+                                        {{ $teste->unidade ?? '-' }}
                                     </td>
 
-                                    <td>{{ $item->loja ?? '-' }}</td>
+                                    <td>{{ $teste->loja ?? '-' }}</td>
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $item->preco ? 'R$ ' . number_format($item->preco, 2, ',', '.') : '-' }}
+                                        {{ $teste->preco ? 'R$ ' . number_format($teste->preco, 2, ',', '.') : '-' }}
                                     </td>
 
                                     <td class="d-none d-md-table-cell">
-                                        {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade ?? '-' }}
+                                        {{ $cidades->firstWhere('id', $teste->cidade_id)->nome_cidade ?? '-' }}
                                     </td>
 
 
@@ -94,7 +98,7 @@
 
 
                                             {{-- Editar --}}
-                                            <a href="{{ route('manutencao.edit', $item->id) }}"
+                                            <a href="{{ route('manutencao.edit', $teste->id) }}"
                                                 class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center"
                                                 title="Editar" style="width: 36px; height: 36px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -107,7 +111,7 @@
                                             </a>
 
                                             {{-- Excluir --}}
-                                            <form action="{{ route('manutencao.destroy', $item->id) }}" method="POST"
+                                            <form action="{{ route('manutencao.destroy', $teste->id) }}" method="POST"
                                                 onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                                 @csrf
                                                 @method('DELETE')
@@ -138,13 +142,13 @@
 
             {{-- ================= MOBILE ================= --}}
             <div class="d-md-none mb-4">
-                {{-- @foreach ($itens as $item) --}}
+                {{-- @foreach ($itens as $teste) --}}
                 <div class="card shadow-sm mb-3 border-dark">
                     <div class="card-body">
                         <div class="d-flex bd-highlight">
-                            <h6 class="fw-bold grow bd-highligh">{{ $item->nome }}</h6>
-                            @if ($item->link)
-                                <a href="{{ $item->link }}" target="_blank">
+                            <h6 class="fw-bold grow bd-highligh">{{ $teste->nome }}</h6>
+                            @if ($teste->link)
+                                <a href="{{ $teste->link }}" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                         fill="currentColor" class="bi bi-link-45deg ml-2 "
                                         style="width: 25px; height: 25px;" viewBox="0 0 16 16">
@@ -157,48 +161,48 @@
                             @else
                             @endif
                         </div>
-                        @if ($item->observacao)
+                        @if ($teste->observacao)
                             <div class="small text-muted mb-2">
-                                {{ $item->observacao }}
+                                {{ $teste->observacao }}
                             </div>
                         @endif
-                        @if ($item->unidade)
+                        @if ($teste->unidade)
                             <div class="small">
                                 <strong>
                                     Unidade:
                                 </strong>
-                                {{ $item->unidade }}
+                                {{ $teste->unidade }}
                             </div>
                         @endif
 
-                        @if ($item->loja)
+                        @if ($teste->loja)
                             <div class="small">
                                 <strong>
                                     Loja:
                                 </strong>
-                                {{ $item->loja }}
+                                {{ $teste->loja }}
                             </div>
                         @endif
-                        @if ($item->preco)
+                        @if ($teste->preco)
                             <div class="small">
                                 <strong>Preço:</strong>
-                                {{ 'R$ ' . number_format($item->preco, 2, ',', '.') }}
+                                {{ 'R$ ' . number_format($teste->preco, 2, ',', '.') }}
                             </div>
                         @endif
-                        @if ($item->cidade)
+                        @if ($teste->cidade)
                             <div class="small mb-3">
                                 <strong>Cidade:</strong>
-                                {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade }}
+                                {{ $cidades->firstWhere('id', $teste->cidade_id)->nome_cidade }}
                             </div>
                         @endif
 
                         <div class="d-flex gap-2 mt-2">
-                            <a href="{{ route('manutencao.edit', $item->id) }}"
+                            <a href="{{ route('manutencao.edit', $teste->id) }}"
                                 class="btn btn-outline-dark btn-sm flex-fill">
                                 Editar
                             </a>
 
-                            <form action="{{ route('manutencao.destroy', $item->id) }}" method="POST"
+                            <form action="{{ route('manutencao.destroy', $teste->id) }}" method="POST"
                                 class="flex-fill" onsubmit="return confirm('Excluir item?')">
                                 @csrf
                                 @method('DELETE')
@@ -212,7 +216,7 @@
                 </div>
                 {{-- @endforeach --}}
             </div>
-
+                  @endforeach
         @empty
             {{-- HEADER --}}
             <div class="d-flex justify-content-between align-items-center mb-3">
