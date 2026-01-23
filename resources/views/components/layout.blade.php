@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" {{--data-bs-theme="light"--}}>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <head>
@@ -38,6 +38,8 @@
 
         {{ $slot }}
     </div>
+{{-- <button onclick="document.documentElement.setAttribute('data-bs-theme','dark')">Dark</button>
+<button onclick="document.documentElement.setAttribute('data-bs-theme','light')">Light</button> --}}
 </body>
 
 </html>
