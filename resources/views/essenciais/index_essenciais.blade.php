@@ -13,7 +13,7 @@
                     <a href="{{ route('index') }}" class="btn btn-outline-dark">
                         <i class="bi bi-arrow-left"></i> Menu
                     </a>
-
+                    <a href="{{ route('locais.index') }}" class="btn btn-outline-dark">Locais</a>
                     <a href="{{ route('essenciais.create') }}" class="btn btn-dark">
                         + Novo Item
                     </a>
@@ -24,7 +24,7 @@
 
             {{-- TABELA --}}
             <div class="d-none d-md-block">
-                <div class="card shadow-sm border border-dark mb-4"">
+                <div class="card shadow-sm border border-dark mb-4">
                     <div class="table-responsive">
 
                         <table class="table table-hover align-middle mb-0 text-center">
@@ -142,22 +142,21 @@
 
                         </div>
                         {{-- AÇÕES --}}
-                            <div class="d-flex gap-2 mt-3">
-                                <a href="{{ route('essenciais.edit', $item->id) }}"
-                                    class="btn btn-outline-dark btn-sm w-50">
-                                    Editar
-                                </a>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="{{ route('essenciais.edit', $item->id) }}"
+                                class="btn btn-outline-dark btn-sm w-50">
+                                Editar
+                            </a>
 
-                                <form action="{{ route('essenciais.destroy', $item->id) }}" method="POST"
-                                    class="w-50"
-                                    onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                        Excluir
-                                    </button>
-                                </form>
-                            </div>
+                            <form action="{{ route('essenciais.destroy', $item->id) }}" method="POST" class="w-50"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                    Excluir
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
@@ -172,9 +171,59 @@
             </div>
 
         @empty
-            <div class="text-center text-muted py-5">
-                Nenhum item cadastrado.
+            <div class="d-flex bd-highlight">
+                {{-- TÍTULO DO LOCAL --}}
+                <h2 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
+                    Essenciais
+                </h2>
+                {{-- BOTÕES --}}
+                <div class="flex-row p-2 bd-highlight">
+                    <a href="{{ route('index') }}" class="btn btn-outline-dark">
+                        <i class="bi bi-arrow-left"></i> Menu
+                    </a>
+
+                    <a href="{{ route('essenciais.create') }}" class="btn btn-dark">
+                        + Novo Item
+                    </a>
+                </div>
             </div>
+            <div class="d-none d-md-block">
+                <div class="card shadow-sm border border-dark mb-4"">
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle mb-0 text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th class="d-none d-md-table-cell">Quantidade</th>
+                                    <th class="d-none d-md-table-cell">Local</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr class="">
+                                    <td class="p-5" colspan="5">
+                                        <h6 class="fw-bold mb-2">Nenhum essencial cadastrado</h6>
+                                        <p class="text-muted mb-4">Você ainda não adicionou nenhum item.</p>
+                                        <a href="{{ route('essenciais.create') }}" class="btn btn-dark btn-sm">+ Novo
+                                            Item</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-muted py-5">
+
+            </div>
+
         @endforelse
 
     </div>
