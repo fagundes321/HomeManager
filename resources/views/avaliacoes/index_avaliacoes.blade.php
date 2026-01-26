@@ -15,7 +15,7 @@
                     </a>
 
                     <a href="{{ route('avaliacao.create') }}" class="btn btn-dark">
-                        + Novo Produto
+                        + Nova avaliação
                     </a>
                 </div>
             </div>
@@ -98,7 +98,6 @@
                                 @elseif($produto->maior_preco)
                                     R$ {{ number_format($produto->maior_preco, 2, ',', '.') }}
                                 @else
-
                                 @endif
                             </div>
 
@@ -279,8 +278,56 @@
 
 
         @empty
-            <div class="text-center text-muted py-5">
-                Nenhum item cadastrado.
+            <div class="d-flex bd-highlight ">
+
+                <h4 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
+                    Avaliações
+                </h4>
+                <div class=" flex-row p-2 bd-highlight">
+                    <a href="{{ route('index') }}" class="btn btn-outline-dark mr-2">
+                        <i class="bi bi-arrow-left"></i> Menu
+                    </a>
+
+                    <a href="{{ route('avaliacao.create') }}" class="btn btn-dark">
+                        + Nova avaliação
+                    </a>
+                </div>
+            </div>
+            <div class="d-none d-md-block">
+                <div class="card shadow-sm border border-dark mb-4"">
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle mb-0 text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 50px" class="text-center">#</th>
+                                    <th></th>
+                                    <th style="width: 35%">Produto</th>
+                                    <th style="width: 15%" class="text-center">Marca</th>
+                                    <th style="width: 15%" class="text-center">Avaliação</th>
+                                    <th style="width: 15%" class="text-center">Preço</th>
+                                    <th style="width: 10%" class="text-center">Data</th>
+                                    <th style="width: 10%" class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr class="">
+                                    <td class="p-5" colspan="8">
+                                        <h6 class="fw-bold mb-2">Nenhuma avaliação cadastrada</h6>
+                                        <p class="text-muted mb-4">Você ainda não adicionou nenhuma avaliação.</p>
+                                        <a href="{{ route('avaliacao.create') }}" class="btn btn-dark btn-sm">+ Nova
+                                            avaliação</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
             </div>
         @endforelse
 
