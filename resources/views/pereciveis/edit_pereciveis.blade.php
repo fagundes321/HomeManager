@@ -72,12 +72,7 @@
                                         <option value="Geladeira" @selected(old('local', $pereciveis->local) == 'Geladeira')>
                                             Geladeira
                                         </option>
-                                        <option value="Área de Serviço" @selected(old('local', $pereciveis->local) === 'Área de Serviço')>
-                                            Área de Serviço
-                                        </option>
-                                        <option value="Banheiro" @selected(old('local', $pereciveis->local) === 'Banheiro')>
-                                            Banheiro
-                                        </option>
+
                                     </select>
                                 </div>
 

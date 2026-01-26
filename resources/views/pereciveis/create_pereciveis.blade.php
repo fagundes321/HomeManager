@@ -64,8 +64,6 @@
                                         <option value="" disabled selected>Selecione o local</option>
                                         <option value="Despensa">Despensa</option>
                                         <option value="Geladeira">Geladeira</option>
-                                        <option value="Área de Serviço">Área de Serviço</option>
-                                        <option value="Banheiro">Banheiro</option>
                                     </select>
                                 </div>
 
