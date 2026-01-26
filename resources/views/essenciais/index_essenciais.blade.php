@@ -6,7 +6,7 @@
             @php
                 $locaisDosEssenciais = $essenciais->where('local_id', $local->id)
             @endphp
-            @if ($locaisDosEssenciais)
+            @if ($locaisDosEssenciais->count())
 
 
             <div class="d-flex bd-highlight">
@@ -39,13 +39,13 @@
                                     <th>#</th>
                                     <th>Nome</th>
                                     <th class="d-none d-md-table-cell">Quantidade</th>
-                                    <th class="d-none d-md-table-cell">Local</th>
+                        
                                     <th>Ações</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($essenciais as $item)
+                                @foreach ($locaisDosEssenciais as $item)
                                     <tr class="">
                                         <td>{{ $loop->iteration }}</td>
 
@@ -71,9 +71,7 @@
                                         </td>
 
 
-                                        <td class="d-none d-md-table-cell">
-                                            {{ $item->local }}
-                                        </td>
+
 
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
@@ -171,7 +169,7 @@
 
             {{-- RESUMO DO LOCAL --}}
             <div class="mb-4 text-end text-muted">
-                Total de essencial em {{ $local }}:
+                Total de essenciais em {{ $local->local }}:
 
                 <strong>{{ $essenciais->count() }}</strong>
             </div>

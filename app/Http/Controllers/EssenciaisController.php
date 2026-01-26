@@ -32,7 +32,9 @@ class EssenciaisController extends Controller
 
      public function create(){
 
-        return view('essenciais.create_essenciais');
+        $locais = Locais::all();
+
+        return view('essenciais.create_essenciais', compact('locais'));
 
     }
 
@@ -49,8 +51,12 @@ class EssenciaisController extends Controller
 
      public function edit(Essenciais $essenciai){
 
-        return view('essenciais.edit_essenciais')
-        ->with('essenciai', $essenciai);
+        $locais = Locais::all();
+
+        return view('essenciais.edit_essenciais', [
+            'essenciai' => $essenciai,
+            'locais' => $locais
+        ]);
 
     }
 

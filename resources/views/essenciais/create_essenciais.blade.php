@@ -61,15 +61,16 @@
 
                                 {{-- Local --}}
                                 <div class="col-12 col-md-3">
-                                    <label for="local" class="form-label fw-semibold text-dark">
+                                    <label for="local_id" class="form-label fw-semibold text-dark">
                                         Local
                                     </label>
-                                    <select id="local" name="local" class="form-select border-dark" required>
+                                    <select id="local_id" name="local_id" class="form-select border-dark" required>
                                         <option value="" disabled selected>Selecione o local</option>
-                                        <option value="Despensa">Despensa</option>
-                                        <option value="Geladeira">Geladeira</option>
-                                        <option value="Área de Serviço">Área de Serviço</option>
-                                        <option value="Banheiro">Banheiro</option>
+                                        @foreach ($locais as $local)
+                                        <option value="{{$local->id}}">
+                                            {{$local->local}}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
 

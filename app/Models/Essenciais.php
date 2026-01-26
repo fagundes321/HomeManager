@@ -12,7 +12,7 @@ class Essenciais extends Model
         'nome',
         'quantidade',
         'unidade',
-        'local'
+        'local_id'
     ];
 
 
