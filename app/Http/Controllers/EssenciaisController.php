@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Essenciais;
+use App\Models\Locais;
 use Illuminate\Http\Request;
 
 class EssenciaisController extends Controller
@@ -11,20 +12,20 @@ class EssenciaisController extends Controller
      public function index(){
 
         $essenciais = Essenciais::all();
+        $locais = Locais::all();
+        // $essenciais = Essenciais::orderByRaw("
+        //         CASE
+        //         WHEN local = 'Despensa' THEN 1
+        //         WHEN local = 'Geladeira' THEN 2
+        //         ELSE 3
+        //     END
+        // ")
+        // ->orderBy('local')
+        // ->get()
+        // ->groupBy('local');
 
-        $essenciais = Essenciais::orderByRaw("
-                CASE
-                WHEN local = 'Despensa' THEN 1
-                WHEN local = 'Geladeira' THEN 2
-                ELSE 3
-            END
-        ")
-        ->orderBy('local')
-        ->get()
-        ->groupBy('local');
-
-        return view('essenciais.index_essenciais', compact('essenciais'))
-        ->with('essenciais', $essenciais);
+        return view('essenciais.index_essenciais', compact('essenciais', 'locais'))
+     ;
 
     }
 

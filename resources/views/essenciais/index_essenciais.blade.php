@@ -2,11 +2,17 @@
 
     <div class="container mt-4">
 
-        @forelse ($essenciais as $local => $essencial)
+        @forelse ($locais as $local)
+            @php
+                $locaisDosEssenciais = $essenciais->where('local_id', $local->id)
+            @endphp
+            @if ($locaisDosEssenciais)
+
+
             <div class="d-flex bd-highlight">
                 {{-- TÍTULO DO LOCAL --}}
                 <h2 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
-                    {{ $local }}
+                    {{ $local->local }}
                 </h2>
                 {{-- BOTÕES --}}
                 <div class="flex-row p-2 bd-highlight">
@@ -24,7 +30,7 @@
 
             {{-- TABELA --}}
             <div class="d-none d-md-block">
-                <div class="card shadow-sm border border-dark mb-4"">
+                <div class="card shadow-sm border border-dark mb-4">
                     <div class="table-responsive">
 
                         <table class="table table-hover align-middle mb-0 text-center">
@@ -39,7 +45,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($essencial as $item)
+                                @foreach ($essenciais as $item)
                                     <tr class="">
                                         <td>{{ $loop->iteration }}</td>
 
@@ -168,9 +174,9 @@
             <div class="mb-4 text-end text-muted">
                 Total de essencial em {{ $local }}:
 
-                <strong>{{ $essencial->count() }}</strong>
+                <strong>{{ $essenciais->count() }}</strong>
             </div>
-
+        @endif
         @empty
             <div class="text-center text-muted py-5">
                 Nenhum item cadastrado.
