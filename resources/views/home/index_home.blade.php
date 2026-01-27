@@ -5,41 +5,24 @@
         {{-- HEADER --}}
 
         <div class="text-center mb-4">
-          <div class="d-flex flex-column flex-md-row align-items-center mb-3 gap-2">
+<div class="row align-items-center mb-3">
+    <div class="col-md-4 d-none d-md-block"></div>
 
-    {{-- Espaço à esquerda (só no desktop) --}}
-    <div class="d-none d-md-block flex-grow-3"></div>
-
-    {{-- Relógio central --}}
-    <div class="text-center">
+    <div class="col-12 col-md-4 text-center mb-2 mb-md-0">
         <span class="badge bg-dark fs-6 px-3 py-2">
             {{ $agora->translatedFormat('d/m/Y') }} •
             <span id="clock">{{ $agora->format('H:i') }}</span>
         </span>
     </div>
 
-    {{-- Botões --}}
-    <div class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2 flex-grow-1 mt-2 mt-md-0">
-
-        <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark">
-            Financeiro
-        </a>
-
-        <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark">
-            Mercados
-        </a>
-
-        <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark">
-            Cidades
-        </a>
-
-        <a href="{{ route('locais.index') }}" class="btn btn-outline-dark">
-            Locais
-        </a>
-
+    <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end gap-2">
+        <a href="{{ route('mercado.index') }}" class="btn btn-outline-dark">Mercados</a>
+        <a href="{{ route('cidades.index') }}" class="btn btn-outline-dark">Cidades</a>
+        <a href="{{ route('locais.index') }}" class="btn btn-outline-dark">Locais</a>
     </div>
-
 </div>
+
+
 
 
         </div>

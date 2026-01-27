@@ -70,7 +70,7 @@
 
                             <div class="small text-muted">
                                    @php
-                                            $unidadesEspeciais = ['kg', 'l'];
+
                                             $temDecimal = fmod($compra->quantidade, 1) != 0;
                                         @endphp
 

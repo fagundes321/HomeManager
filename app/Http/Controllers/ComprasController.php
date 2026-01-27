@@ -21,6 +21,8 @@ class ComprasController extends Controller
        ->orderBy('mercado_id')
        ->get();
 
+        $unidadesEspeciais = ['kg', 'l'];
+
         // Por ordem de criado
         // $compras = Compras::all();
         $mercados = Mercados::all();
@@ -31,12 +33,14 @@ class ComprasController extends Controller
 
 
         $totalCompras = Compras::totalCompras();
-        return view('compras.index_compra')
-            ->with('compras', $compras)
-            ->with('mercados', $mercados)
-            ->with('cidades', $cidades)
-            ->with('totalCompras', $totalCompras)
-            ->with('mensagemSucesso', $mensagemSucesso);
+        return view('compras.index_compra', compact(
+            'compras',
+            'mercados',
+            'cidades',
+            'totalCompras',
+            'mensagemSucesso',
+            'unidadesEspeciais'
+        ));
     }
 
 
