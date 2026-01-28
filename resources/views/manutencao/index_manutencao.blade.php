@@ -44,7 +44,14 @@
                                                     {{ $item->nome }}
                                                     @if ($item->link)
                                                         <a href="{{ $item->link }}" target="_blank" class="ms-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                                                <path
+                                                                    d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                                            </svg>
                                                         </a>
                                                     @endif
                                                 </strong>
@@ -54,17 +61,38 @@
                                             </td>
                                             <td class="d-none d-md-table-cell">{{ $item->unidade ?? '-' }}</td>
                                             <td>{{ $item->loja ?? '-' }}</td>
-                                            <td class="d-none d-md-table-cell">{{ $item->preco ? 'R$ ' . number_format($item->preco, 2, ',', '.') : '-' }}</td>
-                                            <td class="d-none d-md-table-cell">{{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade ?? '-' }}</td>
+                                            <td class="d-none d-md-table-cell">
+                                                {{ $item->preco ? 'R$ ' . number_format($item->preco, 2, ',', '.') : '-' }}
+                                            </td>
+                                            <td class="d-none d-md-table-cell">
+                                                {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade ?? '-' }}
+                                            </td>
                                             <td>
                                                 <div class="d-flex justify-content-center gap-2">
-                                                    <a href="{{ route('manutencao.edit', $item->id) }}" class="btn btn-outline-dark btn-sm" title="Editar">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1-.5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>
+                                                    <a href="{{ route('manutencao.edit', $item->id) }}"
+                                                        class="btn btn-outline-dark btn-sm" title="Editar">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor"
+                                                            class="bi bi-pencil-square">
+                                                            <path
+                                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                            <path fill-rule="evenodd"
+                                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1-.5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                        </svg>
                                                     </a>
-                                                    <form action="{{ route('manutencao.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+                                                    <form action="{{ route('manutencao.destroy', $item->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
                                                         @csrf @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm" title="Excluir">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                            title="Excluir">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" class="bi bi-trash">
+                                                                <path
+                                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                                <path
+                                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                            </svg>
                                                         </button>
                                                     </form>
                                                 </div>
@@ -86,7 +114,13 @@
                                     <h6 class="fw-bold m-0">{{ $item->nome }}</h6>
                                     @if ($item->link)
                                         <a href="{{ $item->link }}" target="_blank">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16"><path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/><path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
+                                                <path
+                                                    d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
+                                            </svg>
                                         </a>
                                     @endif
                                 </div>
@@ -95,16 +129,20 @@
                                 @endif
                                 <div class="small"><strong>Unidade:</strong> {{ $item->unidade ?? '-' }}</div>
                                 <div class="small"><strong>Loja:</strong> {{ $item->loja ?? '-' }}</div>
-                                <div class="small"><strong>Preço:</strong> {{ $item->preco ? 'R$ ' . number_format($item->preco, 2, ',', '.') : '-' }}</div>
-                                <div class="small mb-3"><strong>Cidade:</strong> {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade ?? '-' }}</div>
+                                <div class="small"><strong>Preço:</strong>
+                                    {{ $item->preco ? 'R$ ' . number_format($item->preco, 2, ',', '.') : '-' }}</div>
+                                <div class="small mb-3"><strong>Cidade:</strong>
+                                    {{ $cidades->firstWhere('id', $item->cidade_id)->nome_cidade ?? '-' }}</div>
                                 <div class="d-flex gap-2 mt-2">
-                                    <a href="{{ route('manutencao.edit', $item->id) }}" class="btn btn-outline-dark btn-sm flex-fill">Editar</a>
-                                    <form action="{{ route('manutencao.destroy', $item->id) }}" method="POST" class="flex-fill" onsubmit="return confirm('Excluir item?')">
+                                    <a href="{{ route('manutencao.edit', $item->id) }}"
+                                        class="btn btn-outline-dark btn-sm flex-fill">Editar</a>
+                                    <form action="{{ route('manutencao.destroy', $item->id) }}" method="POST"
+                                        class="flex-fill" onsubmit="return confirm('Excluir item?')">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-outline-danger btn-sm w-100">Excluir</button>
                                     </form>
                                 </div>
-                            </div>
+                            </div>zzzzzz
                         </div>
                     @endforeach
                 </div>
