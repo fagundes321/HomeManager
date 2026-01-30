@@ -294,7 +294,7 @@
                 </div>
             </div>
             <div class="d-none d-md-block">
-                <div class="card shadow-sm border border-dark mb-4"">
+                <div class="card shadow-sm border border-dark mb-4">
                     <div class="table-responsive">
 
                         <table class="table table-hover align-middle mb-0 text-center">
