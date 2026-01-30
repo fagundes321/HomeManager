@@ -7,13 +7,13 @@
                 $locaisDosEssenciais = $essenciais->where('local_id', $local->id);
             @endphp
             @if ($locaisDosEssenciais->count())
-                <div class="d-flex bd-highlight">
+                <div class="d-flex justify-content-between align-items-center mb-3">
                     {{-- TÍTULO DO LOCAL --}}
-                    <h2 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
+                    <h2 class="fw-bold text-dark m-0">
                         {{ $local->local }}
                     </h2>
                     {{-- BOTÕES --}}
-                    <div class="flex-row p-2 bd-highlight">
+                    <div class="d-flex gap-2">
                         <a href="{{ route('index') }}" class="btn btn-outline-dark">
                             <i class="bi bi-arrow-left"></i> Menu
                         </a>

@@ -4,12 +4,12 @@
 
         @forelse ($avaliacoes as $categoria => $produtos)
             {{-- BOTÕES --}}
-            <div class="d-flex bd-highlight ">
+            <div class="d-flex justify-content-between align-items-center mb-3">
 
-                <h4 class="fw-bold text-dark  mb-3 p-2 grow bd-highlight">
+                <h4 class="fw-bold text-dark m-0">
                     {{ $categoria }}
                 </h4>
-                <div class=" flex-row p-2 bd-highlight">
+                <div class=" d-flex gap-2">
                     <a href="{{ route('index') }}" class="btn btn-outline-dark mr-2">
                         <i class="bi bi-arrow-left"></i> Menu
                     </a>
